@@ -1,0 +1,63 @@
+{% load static %}
+{% load sass_tags %}
+{% load custom_templatetags %}
+{% load mathfilters %}
+
+<!-- home slider start -->
+<section class="pt-0 home-section-5">
+    <div class="poster-image slider-for custome-arrow classic-arrow-1">
+        {% for banner in allbanners %}
+        {% if banner.bannerType|to_str == 'Slider' %}
+        <div>
+            <div class="left-main">
+                <div class="left-side-contain">
+                    <div class="banner-left mb-0">
+                        <h4>Sale <span class="theme-color">{{banner.bannerProduct.productVariantDiscount}}% Off</span>
+                        </h4>
+                        <h1>{{banner.titleOne}} <span>{{banner.bannerProduct.variantProduct.proCategory}}</span></h1>
+                        <p>{{banner.titleTwo}} <span class="theme-color">FREE</span></p>
+                        <h2>{{ ""|return_currency_wise_symbol:request }}{{ banner.bannerProduct.productVariantFinalPrice|return_currency_wise_ammount:request }}
+                            <span class="theme-color">
+                                {% if banner.bannerProduct.productVariantDiscount|to_int == 0 %}
+
+                                {% else %}
+                                <del>{{ ""|return_currency_wise_symbol:request }}{{ banner.bannerProduct.productVariantPrice|return_currency_wise_ammount:request }}</del>
+                                {% endif %}
+                            </span>
+                        </h2>
+                        <p class="poster-details">{{banner.bannerProduct.variantProduct.productDescription|safe}}</p>
+                    </div>
+                </div>
+                <img loading="lazy" src="{{banner.bannerImage}}" class="img-fluid blur-up lazyload" alt="">
+            </div>
+        </div>
+        {% endif %}
+        {% endfor %}
+    </div>
+
+    <div class="background-circle">
+        <img src="{% static 'assets/images/flower/back-cirlce.png' %}" class="img-fluid blur-up lazyload" alt="">
+    </div>
+
+    <div class="flower-image">
+        <img src="{% static 'assets/images/flower/poster/a1.png' %}" class="flower-1 blur-up lazyload" alt="">
+        <img src="{% static 'assets/images/flower/poster/a1.png' %}" class="flower-2 blur-up lazyload" alt="">
+    </div>
+
+    <div class="slider-nav image-show">
+        {% for banner in allbanners %}
+        {% if banner.bannerType|to_str == 'Slider' %}
+        <div>
+            <div class="poster-img">
+                <img loading="lazy" src="{{banner.bannerImage}}" class="img-fluid blur-up lazyload" alt="">
+                <div class="overlay-color">
+                    {% comment %} <i class="fas fa-plus"></i> {% endcomment %}
+                    <p class="theme-color">+</p>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        {% endfor %}
+    </div>
+</section>
+<!-- home slider end -->

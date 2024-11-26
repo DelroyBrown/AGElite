@@ -1,0 +1,73 @@
+{% load static %}
+{% load sass_tags %}
+{% load custom_templatetags %}
+{% load mathfilters %}
+
+
+{% block components %}
+
+    <!-- home slider start -->
+    <section class="pt-0 poster-section">
+        <div class="poster-image slider-for custome-arrow classic-arrow">
+              {% for banner in allbanners  %}
+                {% if banner.bannerType|to_str == 'Slider' %}
+                    <div> 
+                        <div class="left-side-contain">
+                            <div class="banner-left">
+                                <h4>Sale <span class="theme-color">{{banner.bannerProduct.productVariantDiscount}}% Off</span></h4>
+                                <h1>{{banner.titleOne}}<span></span></h1>
+                                <p>{{banner.titleTwo}} <span class="theme-color">FREE</span></p>
+                                <h2>{{""|return_currency_wise_symbol:request }}{{banner.bannerProduct.productVariantFinalPrice|return_currency_wise_ammount:request}} <span class="theme-color">
+                                    {% if banner.bannerProduct.productVariantDiscount|to_int == 0 %}
+                                                            
+                                    {% else %}
+                                    <del>{{""|return_currency_wise_symbol:request }}{{banner.bannerProduct.productVariantPrice|return_currency_wise_ammount:request}}</del></span>
+                                    {% endif %}
+                                </h2>
+                                <p class="poster-details mb-0">{{banner.bannerProduct.variantProduct.productDescription|safe}}.</p>
+                            </div>
+                        </div>
+                        <img loading="lazy" src="{{banner.bannerImage}}" class="img-fluid blur-up lazyload" alt="">
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div> 
+       
+        <div class="slider-nav image-show">
+            {% for banner in allbanners  %}
+                {% if banner.bannerType|to_str == 'Slider' %}
+            <div>
+                <div class="poster-img">
+                    <img src="{{banner.bannerImage}}" class="img-fluid blur-up lazyload" alt="">
+                    <div class="overlay-color">
+                        <i class="fas fa-plus theme-color"></i>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+            {% endfor %}
+        </div>
+
+        <div class="right-side-contain">
+            <div class="social-image">
+                <a href="https://www.facebook.com/">
+                    Facebook
+                </a>
+            </div>
+
+            <div class="social-image">
+                <a href="https://www.instagram.com/">
+                    Instagram
+                </a>
+            </div>
+
+            <div class="social-image">
+                <a href="https://twitter.com/">
+                    Twitter
+                </a>
+            </div>
+        </div>
+    </section>
+    <!-- home slider end -->
+
+{% endblock components %}

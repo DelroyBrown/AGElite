@@ -1,0 +1,53 @@
+{% load static %}
+{% load sass_tags %}
+{% load custom_templatetags %}
+{% load mathfilters %}
+
+
+{% block components %}
+
+    <!-- banner section start -->
+     <!-- banner image start -->
+     <section class="banner-section pt-4">
+        <div>
+            <div class="container-fluid">
+                <div class="row g-3">
+                    {% for banner in allbanners  %}
+                    {% if banner.bannerType|to_str == 'Banner' %}
+                    
+                    <div class="col-lg-4 col-md-6">
+                        <div class="banner-image">
+                            <a href="{% url 'shop_left_slidebar' %}">
+                                <img loading="lazy" src="{{banner.bannerImage}}" class="w-100 blur-up lazyload"
+                                    alt="">
+                            </a>
+                            <div class="banner-details">
+                                <a href="{% url 'wishlist_page' %}" class="heart-button">
+                                    <i data-feather="heart"></i>
+                                </a>
+                                <h4>{{banner.bannerProduct.productVariantDiscount}}% <span class="theme-color">OFF</span></h4>
+                                <div class="banner-price">
+                                    <h2>${{banner.bannerProduct.productVariantFinalPrice}}.00 </h2>
+                                    <h5 class="theme-color"><del>${{banner.bannerProduct.productVariantPrice}}.00</del></h5>
+                                </div>
+                            </div>
+
+                            <a href="{% url 'shop_left_slidebar' %}" class="banner-shop text-center">
+                                <div>
+                                    <h5>SHOP NOW</h5>
+                                    <p class="mb-0 mt-2">{{banner.titleOne}}</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- banner image end -->
+    <!-- banner section end -->
+
+
+{% endblock components %}

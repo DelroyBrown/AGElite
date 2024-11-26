@@ -1,0 +1,9 @@
+{% load static %}
+{% load sass_tags %}
+
+<a href="/index_default">
+    <svg class="svg-icon">
+        <use class="fill-color" xlink:href="{% static 'assets/svg/icons.svg' %}#logo"></use>
+    </svg> 
+    <img loading="lazy" src="{% static 'assets/images/logo.png' %}" class="img-fluid blur-up lazyload" alt="logo">
+</a>

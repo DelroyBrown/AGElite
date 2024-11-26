@@ -1,0 +1,57 @@
+{% load static %}
+{% load sass_tags %}
+{% load custom_templatetags %}
+{% load mathfilters %}
+
+<!-- instagram shop section start -->
+{% if insta_banner %}
+<section class="ratio_square">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col">
+                <div class="title title-2 text-center">
+                    <h2>Instagram Shop</h2>
+                    <h5>New Collection</h5>
+                </div>
+                <div class="product-style-1 instagram-2">
+                    <div class="insta-slider product-wrapper instagram-wrap">
+                        {% for banner in allbanners  %}
+                        {% if banner.bannerType|to_str == 'Instagram' %} 
+                        <div>
+                            <div class="product-box">
+                                <div class="img-wrapper">
+                                    <div class="top-wishlist product-color">
+                                        <a href="{% url 'wishlist_page' %}" class="heart-wishlist heart-color wishlist">
+                                            <i class="far fa-heart"></i>
+                                        </a>
+                                    </div>
+                                    <div class="share share-box share-opacity">
+                                        <span class="share-plus share-plus-color">+</span>
+                                        <span>Share</span>
+                                    </div>
+                                    <a href="{% url 'canvas_filter' %}" class="text-center">
+                                        <img loading="lazy" src="{{banner.bannerImage}}"
+                                            class="bg-img blur-up lazyload" alt="">
+                                    </a>
+                                </div>
+                                <div class="insta-hover text-center">
+                                    <div>
+                                        <h5>New Offer {{banner.bannerProduct.productVariantDiscount}} Discount</h5>
+                                        <h3 class="text-hide">{{banner.bannerProduct.variantProduct.productBrand}} ${{banner.bannerProduct.productVariantFinalPrice}}</h3>
+                                        <button onclick="location.href = '{% url 'canvas_filter' %}' " type="button"
+                                            class="btn btn-light-white">Shop now <i
+                                                class="fas fa-chevron-right ms-2"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endif %}
+<!-- instagram shop section end -->

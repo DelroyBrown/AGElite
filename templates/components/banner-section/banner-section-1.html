@@ -1,0 +1,67 @@
+{% load static %}
+{% load sass_tags %}
+{% load custom_templatetags %}
+{% load mathfilters %}
+
+<!-- slider section start -->
+<section class="ratio2_1 banner-style-2">
+    <div class="container">
+        <div class="row gy-4">
+                {% if allbanners  %}
+                {% comment %} {% if request.path == '/index_default' %} {% endcomment %}
+                {% for banner in allbanners %}
+                        {% if banner.bannerType|to_str == 'Banner' %}
+
+                        <div class="col-lg-4 col-md-6">
+                            <div class="collection-banner p-bottom p-center text-center">
+                                <a href="{% url 'shop_left_slidebar' %}" class="banner-img">
+                                    <img loading="lazy" src="{{banner.bannerImage}}" class="bg-img blur-up lazyload" alt="">
+                                </a>
+                                <div class="banner-detail">
+                                    <a href="{% url 'add_to_wishlist' banner.bannerProduct.variantProduct.id|return_first_product_variant %}" class="heart-wishlist wishlist">
+                                        <i class="far fa-heart"></i>
+                                    </a>
+                                    <span class="font-dark-30">{{banner.bannerProduct.productVariantDiscount}}% <span>OFF</span></span>
+                                </div>
+                                <a href="{% url 'shop_left_slidebar'%}" class="contain-banner">
+                                    <div class="banner-content with-big">
+                                        <h2 class="mb-2">{{banner.bannerProduct.variantProduct.productName}}</h2>
+                                        <span>BUY ONE GET ONE FREE</span>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        {% endif %}
+                    {% endfor %}
+                    {% elif request.path == '/flower_demo' %}
+                    {% for banner in allbanners %}
+
+                        {% if banner.bannerType|to_str == 'Banner' %}
+                        <div class="col-lg-4 col-md-6">
+                            <div class="collection-banner p-bottom p-center text-center">
+                                <a href="{% url 'shop_left_slidebar' %}" class="banner-img">
+                                    <img loading="lazy" src="{{banner.bannerImage}}" class="bg-img blur-up lazyload" alt="">
+                                </a>
+                                <div class="banner-detail">
+                                    <a href="{% url 'add_to_wishlist' banner.bannerProduct.variantProduct.id|return_first_product_variant %}" class="heart-wishlist">
+                                        <i class="far fa-heart"></i>
+                                    </a>
+                                    <span class="font-dark-30">{{banner.bannerProduct.productVariantDiscount}}% <span>OFF</span></span>
+                                </div>
+                                <a href="{% url 'shop_left_slidebar' %}" class="contain-banner">
+                                    <div class="banner-content with-big">
+                                        <h2 class="mb-2">{{banner.titleOne}}</h2>
+                                        <span>BUY ONE GET ONE FREE</span>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        {% endif %}
+                {% endfor %}
+                {% comment %} {% endif %} {% endcomment %}
+            {% endif %}
+        </div>
+    </div>
+</section>
+<!-- slider section end -->
+

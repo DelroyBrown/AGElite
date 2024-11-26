@@ -1,0 +1,45 @@
+{% load static %}
+{% load sass_tags %}
+{% load custom_templatetags %}
+{% load mathfilters %}
+<!-- Poster Section Start -->
+    <section class="poster-section ratio2_1">
+        <div>
+            <div class="container">
+                <div class="row">
+                    {% for banner in allbanners  %}
+                    {% if banner.bannerType|to_str == "Banner" %}
+                    <div class="col-lg-6">
+                        <div class="poster-image">
+                            <img loading="lazy" src="{{banner.bannerImage}}" class="img-fluid bg-img blur-up lazyload"
+                                alt="">
+                            <div class="poster-image-details">
+                                <div>
+                                    <h5>Get {{banner.bannerProduct.productVariantDiscount}}% Rewarded</h5>
+                                    <h2>{{banner.bannerProduct.variantProduct.productName}}</h2>
+                                    <p class="d-sm-block d-none my-1">{{banner.titleOne}}</p>
+
+                                    <h3>{{""|return_currency_wise_symbol:request }}{{banner.bannerProduct.productVariantFinalPrice|return_currency_wise_ammount:request}}<span>
+                                        <del>
+                                            {% if banner.bannerProduct.productVariantDiscount|to_int == 0 %}
+                                            {% else %}
+                                            {{""|return_currency_wise_symbol:request }}{{banner.bannerProduct.productVariantPrice|return_currency_wise_ammount:request}}
+                                            {% endif %}
+                                        </del></span>
+                                    </h3>
+
+
+                                    <button onclick="location.href = '{% url 'shop_left_slidebar' %}' "
+                                        class="btn btn-solid-default">BUY NOW</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+                    {% endfor %}
+
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Poster Section End -->

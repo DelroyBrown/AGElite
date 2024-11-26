@@ -1,0 +1,31 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% load sass_tags %}
+{% block components %}
+
+<!-- Loader div Start -->
+<div class='loader-wrapper' id="loaderWrapper">
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+</div>
+<!-- Loader div End -->
+{% include 'components/header/shoes-header.html' %}
+{% include 'components/mobile-fix-menu/mobile-fix-menu-2.html' %}
+{% include 'components/home-section/shoes-home-section.html' %}
+{% include "components/service-section/service-section-1.html" %}
+{% include "components/poster-section/shoes-poster-section.html" %}
+{% include 'components/product-section/shoes-product-section.html' %}
+{% include 'components/banner-section-2/banner-section-2-1.html' %}
+{% include 'components/category-section/shoes-category-section.html' %}
+{% include 'components/new-arrival-section/shoes-new-arrival-section.html' %}
+{% include 'components/deal-of-the-day/shoes-deal-of-the-day.html' %}
+{% include 'components/subscribe-section/shoes-subscribe-section.html' %}
+{% include 'components/brand-section/electronics-brand-section.html' %}
+{% include 'components/footer/footer-1.html' %}
+{% endblock components %}

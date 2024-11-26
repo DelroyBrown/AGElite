@@ -1,0 +1,199 @@
+{% load static %}
+{% load sass_tags %}
+{% load custom_templatetags %}
+{% load mathfilters %}
+
+<!-- Slider start -->
+<section class="home-section home-style-2 pt-0">
+    <div class="container-fluid p-0">
+        <div class="slick-2 dot-dark">
+
+            {% for banner in allbanners %}
+            {% if banner.bannerType|to_str == 'Slider'%}
+            <div>
+                <div class="home-slider">
+                    <div class="home-wrap row m-0">
+                        <div class="col-xxl-3 col-lg-4 p-0 d-lg-block d-none">
+                            <div class="home-left-wrapper">
+                                <div>
+                                    <h2>{{banner.bannerProduct.variantProduct.productName}}</h2>
+
+                                    <div class="d-flex">
+                                        <ul class="rating p-0 me-2">
+
+                                            {% if banner.bannerProduct.variantProduct.productFinalRating|to_int < 5|to_int %}
+
+
+                                            {% for x in banner.bannerProduct.variantProduct.productFinalRating|times %}
+                                            <li>
+                                                <i class="fas fa-star theme-color"></i>
+                                            </li>
+                                            {% endfor %}
+
+                                            {% with number1=5|to_int number2=banner.bannerProduct.variantProduct.productFinalRating|to_int %}
+                                            {% with number3=number1|sub:number2 %}
+
+
+                                            {% for x in number3|times %}
+                                            <li>
+                                                <i class="fas fa-star"></i>
+                                            </li>
+                                            {% endfor %}
+
+                                            {% endwith %}
+                                            {% endwith %}
+
+                                            {% else %}
+
+                                            <li>
+                                                <i class="fas fa-star theme-color"></i>
+                                            </li>
+                                            <li>
+                                                <i class="fas fa-star theme-color"></i>
+                                            </li>
+                                            <li>
+                                                <i class="fas fa-star theme-color"></i>
+                                            </li>
+                                            <li>
+                                                <i class="fas fa-star theme-color"></i>
+                                            </li>
+                                            <li>
+                                                <i class="fas fa-star theme-color"></i>
+                                            </li>
+                                            {% endif %}
+                                        </ul>
+                                        <h6 class="text-light">(
+                                            {{banner.bannerProduct.variantProduct.productNoOfReview}} Review )
+                                        </h6>
+                                    </div>
+
+                                    <p>{{banner.bannerProduct.variantProduct.productDescription|safe}}</p>
+                                    <h3>{{""|return_currency_wise_symbol:request }}{{banner.bannerProduct.productVariantFinalPrice|return_currency_wise_ammount:request}}
+                                        {% if banner.bannerProduct.productVariantDiscount|to_int == 0 %}
+                                        {% else %}
+                                        <del class="theme-color">
+                                            {{""|return_currency_wise_symbol:request }}{{banner.bannerProduct.productVariantPrice|return_currency_wise_ammount:request}}
+                                        </del>
+                                        {% endif %}</h3>
+
+
+                                    <ul class="selection-wrap">
+                                        <li>
+                                            <div class="dark-select">
+                                                <select class="form-select">
+                                                    <option selected>Size</option>
+                                                    <option value="1">S</option>
+                                                    <option value="2">M</option>
+                                                    <option value="3">L</option>
+                                                    <option value="4">XL</option>
+                                                </select>
+                                                <i class="fas fa-chevron-down"></i>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="dark-select">
+                                                <select class="form-select">
+                                                    <option selected>Color</option>
+                                                    <option value="1">Black</option>
+                                                    <option value="2">White</option>
+                                                    <option value="3">Blue</option>
+                                                    <option value="4">Gray</option>
+                                                </select>
+                                                <i class="fas fa-chevron-down"></i>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="dark-select">
+                                                <select class="form-select">
+                                                    <option selected>Qty</option>
+                                                    <option value="1">1</option>
+                                                    <option value="2">2</option>
+                                                    <option value="3">3</option>
+                                                    <option value="4">4</option>
+                                                </select>
+                                                <i class="fas fa-chevron-down"></i>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                    <div class="add-btn">
+                                        {% comment %} <a href="{% url 'add_to_cart' banner.bannerProduct.id %}"
+                                            class="btn btn-white">Add to cart</a> {% endcomment %}
+                                        <a href="{% url 'add_to_cart' banner.bannerProduct.variantProduct.id|return_first_product_variant 1 %}"
+                                            class="btn btn-white">Add to cart</a>
+                                        {% comment %}
+                                        {% url 'add_to_wishlist' product.id|return_first_product_variant %}
+                                        {% endcomment %}
+                                        <a href="{% url 'add_to_wishlist' banner.bannerProduct.variantProduct.id|return_first_product_variant %}"
+                                            class="btn btn-solid-default ms-2 wishlist">
+                                            <i class="fas fa-heart"></i>
+                                        </a>
+                                    </div>
+                                    <div class="share-icons">
+                                        <span>share with</span>
+                                        <ul class="share-icons p-0">
+                                            <li>
+                                                <a target="_blank"
+                                                    href="https://www.facebook.com/sharer/sharer.php?u=#url">
+                                                    <img loading="lazy"
+                                                        src="{% static 'assets/images/social-icon/4.png' %}"
+                                                        class="img-fluid blur-up lazyload" alt="social icon">
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="https://www.google.co.in/">
+                                                    <img loading="lazy"
+                                                        src="{% static 'assets/images/social-icon/5.png' %}"
+                                                        class="img-fluid blur-up lazyload" alt="social icon">
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="http://www.twitter.com/share">
+                                                    <img loading="lazy"
+                                                        src="{% static 'assets/images/social-icon/6.png' %}"
+                                                        class="img-fluid blur-up lazyload" alt="social icon">
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xxl-9 col-lg-8 p-0 left-content">
+                            <img loading="lazy" src="{{banner.bannerImage}}" class="bg-img blur-up lazyload" alt="">
+                            <div class="home-content row">
+                                <div class="col-xxl-4 col-lg-4 col-md-4 col-sm-5 col-6">
+                                    <h3>Sale {% if banner.bannerProduct.productVariantDiscount|to_int == 0 %}
+                                        {% else %}
+                                        <span class="theme-color">{{banner.bannerProduct.productVariantDiscount}}%
+                                            OFF</span>
+                                        {% endif %}
+                                    </h3>
+                                    <h1 data-animation-in="fadeInUp">{{banner.bannerProduct.variantProduct.proCategory}}
+                                    </h1>
+                                    <h6 class="mb-4" data-animation-in="fadeInUp" data-delay-in="0.4">
+                                        {{banner.titleOne}}
+                                        <span class="theme-color">FREE</span></h6>
+                                    <div class="discover-block" data-animation-in="fadeInUp" data-delay-in="0.7">
+                                        <div class="d-flex">
+                                            <a href="{% url 'shop_left_slidebar' %}" class="play-icon theme-bg-color">
+                                                <i class="fas fa-play"></i>
+                                            </a>
+                                            <div class="discover-content">
+                                                <h4 class="theme-color mb-1">Discover</h4>
+                                                <h6>Our Collection</h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+            {% endfor %}
+
+        </div>
+    </div>
+</section>
+<!-- sliderbar end -->

@@ -1,0 +1,605 @@
+{% load static %}
+{% load sass_tags %}
+{% load custom_templatetags %}
+{% load mathfilters %}
+
+<!-- header start -->
+<header class="header-style-2" id="home">
+  {% comment %}
+  <div class="top-header demo2">
+    <div class="container-fluid-lg">
+      <div class="row">
+        <div class="col-auto" style="margin-left: auto;">
+          <ul class="border-list">
+            <select id="currency-selection">
+              <option id="currency-value" value="%">Currency</option>
+              {% for cur in ""|return_currency %}
+              <option value="{{cur.id}}">{{cur.symbol}} {{cur.code}}</option>
+              {% endfor %}
+            </select>
+
+            <script>
+              var getColorValue = localStorage.getItem("colorValue");
+
+              // Access the root element
+              const root = document.documentElement;
+
+              // Update the value of --theme-color
+              root.style.setProperty('--theme-color', getColorValue);
+
+
+
+              document.getElementById("currency-selection").addEventListener("change", async function () {
+                var dropdown = document.getElementById("currency-selection");
+                var currencyId = dropdown.options[dropdown.selectedIndex].value;
+                var csrftoken = getCookie("csrftoken");
+                var url = "{% url 'set_currency_to_session' %}";
+
+                await fetch(url, {
+                  method: "POST",
+                  headers: {
+                    "Content-type": "application/json",
+                    "X-CSRFToken": csrftoken,
+                  },
+                  body: JSON.stringify({
+                    currencyId: currencyId,
+                  }),
+                })
+                location.reload();
+
+              });
+            </script>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div> {% endcomment %}
+  <div class="top-header demo2">
+    <div class="container-fluid-lg">
+      <div class="row">
+        <div class="col-auto d-xl-block d-none">
+          <ul class="border-list">
+            <li>Voxo ecommerce always free delivery</li>
+            <li>New Customer Extra 50% Off</li>
+          </ul>
+        </div>
+        <div class="col-auto d-sm-block d-none">
+          <p class="font-dark-30 mb-0">Offer Coupon Code : <span class="fw-bold">DEF4526</span></p>
+        </div>
+        <div class="col-auto">
+          <ul class="border-list">
+            <li>
+              <div class="dropdown top-header-dropdown">
+                <a class="dropdown-toggle" href="javascript:void(0)" role="button" id="dropdownMenuLink"
+                  data-bs-toggle="dropdown">
+                  <span>Login & Register</span>
+                  <i class="fas fa-chevron-down"></i>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end">
+                  <li class="w-100">
+                    <a class="dropdown-item" href="{% url 'login_page' %}">Log In</a>
+                  </li>
+                  <li class="w-100">
+                    <a class="dropdown-item" href="{% url 'signup_page' %}">Register</a>
+                  </li>
+                </ul>
+              </div>
+            </li>
+
+            <li>
+              <div class="dropdown top-header-dropdown">
+                <a class="dropdown-toggle" href="javascript:void(0)" role="button" id="dropdownMenuLink1"
+                  data-bs-toggle="dropdown">
+                  <ul class="border-list">
+                    <select id="currency-selection">
+                      <option id="currency-value" value="%">Currency</option>
+                      {% for cur in ""|return_currency %}
+                      <option value="{{cur.id}}">{{cur.symbol}} {{cur.code}}</option>
+                      {% endfor %}
+                    </select>
+                    <script>
+
+                      var getColorValue = localStorage.getItem("colorValue");
+
+                      // Access the root element
+                      const root = document.documentElement;
+
+                      // Update the value of --theme-color
+                      root.style.setProperty('--theme-color', getColorValue);
+                      
+
+                      document.getElementById("currency-selection").addEventListener("change",
+                        async function () {
+                          var dropdown = document.getElementById(
+                            "currency-selection");
+                          var currencyId = dropdown.options[dropdown
+                            .selectedIndex].value;
+                          var csrftoken = getCookie("csrftoken");
+                          var url = "{% url 'set_currency_to_session' %}";
+
+                          await fetch(url, {
+                            method: "POST",
+                            headers: {
+                              "Content-type": "application/json",
+                              "X-CSRFToken": csrftoken,
+                            },
+                            body: JSON.stringify({
+                              currencyId: currencyId,
+                            }),
+                          })
+                          location.reload();
+                        });
+                    </script>
+                  </ul>
+
+                </a>
+
+              </div>
+            </li>
+
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="main-header navbar-searchbar">
+    <div class="container-fluid-lg">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="main-menu">
+            <div class="menu-left">
+              <div class="brand-logo">
+                {% include 'layout/voxo-logo.html' %}
+              </div>
+              <div class="category-menu">
+                <div class="category-dropdown">
+                  <div class="close-btn d-xl-none">
+                    Category List
+                    <span class="back-category"><i class="fa fa-angle-left"></i>
+                    </span>
+                  </div>
+                  <ul>
+                    <li class="submenu">
+                      <a href="javascript:void(0)">watches</a>
+                      <ul class="category-mega-menu">
+                        <li>
+                          <div class="row">
+                            <div class="col-xl-3">
+                              <div class="category-childmenu">
+                                <div class="title-category">
+                                  <h6>Watch Brands</h6>
+                                </div>
+                                <ul>
+                                  <li>
+                                    <a href="{% url 'shop_left_slidebar' %}">Coros</a>
+                                  </li>
+                                  <li>
+                                    <a href="{% url 'shop_left_slidebar' %}">Titan</a>
+                                  </li>
+                                  <li>
+                                    <a href="{% url 'shop_left_slidebar' %}">Citizen</a>
+                                  </li>
+                                  <li>
+                                    <a href="{% url 'shop_left_slidebar' %}">Casio</a>
+                                  </li>
+                                  <li>
+                                    <a href="{% url 'shop_left_slidebar' %}">Movado</a>
+                                  </li>
+                                  <li>
+                                    <a href="{% url 'shop_left_slidebar' %}">Tissot</a>
+                                  </li>
+                                </ul>
+                              </div>
+                            </div>
+                            <div class="col-xl-3">
+                              <div class="category-childmenu">
+                                <div class="title-category">
+                                  <h6>Watch Display</h6>
+                                </div>
+                                <ul>
+                                  <li>
+                                    <a href="{% url 'shop_left_slidebar' %}">Analog</a>
+                                  </li>
+                                  <li>
+                                    <a href="{% url 'shop_left_slidebar' %}">Digital</a>
+                                  </li>
+                                  <li>
+                                    <a href="{% url 'shop_left_slidebar' %}">Hybrid</a>
+                                  </li>
+                                  <li>
+                                    <a href="{% url 'shop_left_slidebar' %}">Tactile</a>
+                                  </li>
+                                  <li>
+                                    <a href="{% url 'shop_left_slidebar' %}">Touchscreen</a>
+                                  </li>
+                                </ul>
+                              </div>
+                            </div>
+                            <div class="col-xl-3">
+                              <div class="category-childmenu">
+                                <div class="title-category">
+                                  <h6>Watch Style</h6>
+                                  <ul>
+                                    <li>
+                                      <a href="{% url 'shop_left_slidebar' %}">Casual</a>
+                                    </li>
+                                    <li>
+                                      <a href="{% url 'shop_left_slidebar' %}">Dress</a>
+                                    </li>
+                                    <li>
+                                      <a href="{% url 'shop_left_slidebar' %}">Fashion</a>
+                                    </li>
+                                    <li>
+                                      <a href="{% url 'shop_left_slidebar' %}">Luxury</a>
+                                    </li>
+                                  </ul>
+                                </div>
+                              </div>
+                              <div class="col-xl-3">
+                                <div class="category-banner">
+                                  <img src="{% static 'assets/images/electronics/banner/4.jpg' %}"
+                                    class="img-fluid blur-up lazyload" alt="" />
+                                </div>
+                              </div>
+                            </div>
+                        </li>
+                      </ul>
+                    </li>
+
+                    <li>
+                      <a href="{% url 'shop_left_slidebar' %}">footwear</a>
+                    </li>
+
+                    <li class="submenu">
+                      <a href="javascript:void(0)">clothing</a>
+                      <ul class="category-mega-menu">
+                        <li>
+                          <div class="row">
+                            <div class="col-xl-3">
+                              <div class="category-childmenu">
+                                <div class="title-category">
+                                  <h6>Women's fashion</h6>
+                                </div>
+                                <ul>
+                                  <li>
+                                    <a href="{% url 'shop_left_slidebar' %}">Dress</a>
+                                  </li>
+                                  <li>
+                                    <a href="{% url 'shop_left_slidebar' %}">Skirts</a>
+                                  </li>
+                                  <li>
+                                    <a href="{% url 'shop_left_slidebar' %}">Western wear</a>
+                                  </li>
+                                  <li>
+                                    <a href="{% url 'shop_left_slidebar' %}">Etahnic wear</a>
+                                  </li>
+                                  <li>
+                                    <a href="{% url 'shop_left_slidebar' %}">Sports wear</a>
+                                  </li>
+                                </ul>
+                              </div>
+                            </div>
+                            <div class="col-xl-3">
+                              <div class="category-childmenu">
+                                <div class="title-category">
+                                  <h6>Men's fashion</h6>
+                                </div>
+                                <ul>
+                                  <li>
+                                    <a href="{% url 'shop_left_slidebar' %}">Sports wear</a>
+                                  </li>
+                                  <li>
+                                    <a href="{% url 'shop_left_slidebar' %}">Etahnic wear</a>
+                                  </li>
+                                  <li>
+                                    <a href="{% url 'shop_left_slidebar' %}">Western wear</a>
+                                  </li>
+                                </ul>
+                              </div>
+                            </div>
+                            <div class="col-xl-3">
+                              <div class="category-childmenu">
+                                <div class="title-category">
+                                  <h6>Accesories</h6>
+                                </div>
+                                <ul>
+                                  <li>
+                                    <a href="{% url 'shop_left_slidebar' %}">earrings</a>
+                                  </li>
+                                  <li>
+                                    <a href="{% url 'shop_left_slidebar' %}">fashion jewellery</a>
+                                  </li>
+                                  <li>
+                                    <a href="{% url 'shop_left_slidebar' %}">ties</a>
+                                  </li>
+                                  <li>
+                                    <a href="{% url 'shop_left_slidebar' %}">caps and hats</a>
+                                  </li>
+                                  <li>
+                                    <a href="{% url 'shop_left_slidebar' %}">cufflinks</a>
+                                  </li>
+                                  <li>
+                                    <a href="{% url 'shop_left_slidebar' %}">precious jewellery</a>
+                                  </li>
+                                  <li>
+                                    <a href="{% url 'shop_left_slidebar' %}">necklaces</a>
+                                  </li>
+                                </ul>
+                              </div>
+                            </div>
+                            <div class="col-xl-3">
+                              <div class="category-banner">
+                                <img src="{% static 'assets/images/banner/1.jpg' %}" class="img-fluid blur-up lazyload"
+                                  alt="" />
+                              </div>
+                            </div>
+                          </div>
+                        </li>
+                      </ul>
+                    </li>
+
+                    <li>
+                      <a href="{% url 'shop_left_slidebar' %}">Accessories</a>
+                    </li>
+                    <li>
+                      <a href="{% url 'shop_left_slidebar' %}">Home & decor</a>
+                    </li>
+                    <li>
+                      <a href="{% url 'shop_left_slidebar' %}">Bags</a>
+                    </li>
+                    <li>
+                      <a href="{% url 'shop_left_slidebar' %}">Kitchan</a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <nav>
+              <div class="main-navbar">
+                <div id="mainnav">
+                  <button class="toggle-nav">
+                    <i class="fa fa-bars sidebar-bar"></i>
+                  </button>
+                  <ul class="nav-menu">
+                    <li class="back-btn d-xl-none">
+                      <div class="close-btn">
+                        Menu
+                        <span class="mobile-back"><i class="fa fa-angle-left"></i>
+                        </span>
+                      </div>
+                    </li>
+                    <!-- ===================================================================================== -->
+                    {% include 'layout/nav-link.html' %}
+                    <!-- ===================================================================================== -->
+
+                    <li class="mobile-poster d-flex d-xl-none">
+                      <img src="{% static 'assets/images/pwa.png' %}" class="img-fluid" alt="" />
+                      <div class="mobile-contain">
+                        <h5>Enjoy app-like experience</h5>
+                        <p class="font-light">
+                          With this Screen option you can use Website like an
+                          App.
+                        </p>
+                        <a href="javascript:void(0)" id="installApp" class="btn btn-solid-default btn-spacing w-100">ADD
+                          TO HOMESCREEN</a>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </nav>
+            <!-- menu-right========================================================================== -->
+            <div class="menu-right">
+              <ul>
+                <li>
+                  <div class="search-box" id="searchButton">
+                    <i data-feather="search"></i>
+                  </div>
+                </li>
+                <li class="onhover-dropdown">
+                  <div class="cart-media">
+                    <i data-feather="user"></i>
+                  </div>
+                  <div class="onhover-div profile-dropdown">
+                    <ul>
+                      {% if request.user.is_authenticated %}
+                      <li>
+                        <!-- <a href="log-in.html" class="d-block">Profile</a> -->
+                        <h6 class="d-block">
+                          Welcome, {{request.user.username}}
+                        </h6>
+                      </li>
+                      <li>
+                        <a href="{% url 'logout_page' %}" class="d-block">Logout</a>
+                      </li>
+                      {% else %}
+                      <li>
+                        <a href="{% url 'login_page' %}" class="d-block">Login</a>
+                      </li>
+                      <li>
+                        <a href="{% url 'signup_page' %}" class="d-block">Register</a>
+                      </li>
+                      {% endif %}
+                    </ul>
+                  </div>
+                </li>
+                <li class="onhover-dropdown wislist-dropdown">
+                  <div class="cart-media">
+                    <a href="{% url 'wishlist_page' %}">
+                      <i data-feather="heart"></i>
+                      {% if request.user.is_authenticated %}
+                      <span
+                        class="label label-theme rounded-pill">{{totalWishlistProducts|return_totalWishlistProducts:request}}</span>
+                      {% else %}
+                      <span
+                        class="label label-theme rounded-pill">0</span>
+                      {% endif %}
+                    </a>
+                  </div>
+                  <div class="onhover-div">
+                    <a href="{% url 'wishlist_page' %}">
+                      <div class="wislist-empty">
+                        <i class="fab fa-gratipay"></i>
+
+                        {% if totalWishlistProducts|return_totalWishlistProducts:request > 0 %}
+                        <h6 class="mb-1">
+                          Your have {{totalWishlistProducts|return_totalWishlistProducts:request}} item in wislist !!
+                        </h6>
+                        {% else %}
+                        <h6 class="mb-1">Your wislist empty !!</h6>
+                        {% endif %}
+                        <p class="font-light mb-0">
+                          explore more and shortlist items.
+                        </p>
+                      </div>
+                    </a>
+                  </div>
+                </li>
+                <li class="onhover-dropdown cart-dropdown">
+                  <button type="button" class="btn btn-solid-default btn-spacing" id="colorUsed">
+                    <i data-feather="shopping-cart" class="pe-2"></i>
+                    {% if request.user.is_authenticated %}
+                      <span
+                      id="cartTotalPriceButton">{{""|return_currency_wise_symbol:request}}{{""|return_cartTotalPrice:request|return_currency_wise_ammount:request}}</span>
+                    {% else %}
+                      <span
+                      id="cartTotalPriceButton">{{""|return_currency_wise_symbol:request}}{{0|return_cartTotalPrice:request|return_currency_wise_ammount:request}}</span>
+                    {% endif %}
+
+                  </button>
+                  <div class="onhover-div">
+                    <div class="cart-menu">
+                      <div class="cart-title">
+                       {% if totalCartProducts %}
+                        <h6>
+                          <i data-feather="shopping-bag"></i>
+                          <span
+                            class="label label-theme rounded-pill">{{totalCartProducts|return_totalCartProducts:request}}</span>
+                        </h6>
+                        {% else %}
+                        <h6>
+                          <i data-feather="shopping-bag"></i>
+                          <span
+                            class="label label-theme rounded-pill">0</span>
+                        </h6>
+                        {% endif %}
+                        <span class="d-md-none d-block">
+                          <i class="fas fa-arrow-right back-cart"></i>
+                        </span>
+                      </div>
+                      
+                        {% if request.user.is_authenticated %}
+                        <ul class="custom-scroll">
+                          {% if totalCartProducts|return_totalCartProducts:request|to_int == 0|to_int %}
+                            <li>
+                              <img src="{% static 'assets/images/cartEmpty.png' %}" alt="" class="img-fluid" />
+                            </li>
+                          {% else %}
+                          
+                            {% for product in cart_products|return_cart_products:request %}
+                              
+                                <li>
+                                  <div class="media">
+                                    <img src="/{{product.cartProduct.variantProduct.productImageFront}}"
+                                      class="img-fluid blur-up lazyload" alt="" />
+                                    <div class="media-body">
+                                      <h6>
+                                        {{product.cartProduct.variantProduct.productName}}
+                                      </h6>
+                                      <div class="qty-with-price">
+                                        <span>{{""|return_currency_wise_symbol:request}}{{product.cartProduct.productVariantFinalPrice|return_currency_wise_ammount:request}}
+                                          &nbsp; &nbsp; X &nbsp; &nbsp; {{product.cartProductQuantity}} </span>
+                                         <a href="{% url 'delete_cart_product_form_header_button' product.cartProduct.id  %} "><i
+                                            class="fas fa-times"></i></a> 
+                                      </div>
+                                    </div>
+                                  </li>
+                                
+                            {% endfor %}
+                            </ul>
+                            </div>
+                          <div class="cart-btn">
+                            <h6 class="cart-total">
+                              <span class="font-light">Total:</span> $542.00
+                            </h6>
+                            <button onclick="location.href = '/cart_page';" type="button"
+                              class="btn btn-solid-default btn-block">
+                              Proceed to payment
+                            </button>
+                          </div>
+                          {% endif %}
+
+                        {% else %}
+                          <ul class="custom-scroll">
+                          {% if totalCartProducts|to_int == 0|to_int %}
+                            <li>
+                              <img src="{% static 'assets/images/cartEmpty.png' %}" alt="" class="img-fluid" />
+                            </li>
+                          {% else %}
+                            {% for product in cart_products %}
+                              <li>
+                                <div class="media">
+                                  <img src="{{product.productImage}}" class="img-fluid blur-up lazyload" alt="" />
+                                  <div class="media-body">
+                                    <h6>
+                                      {{product.productName}}
+                                    </h6>
+                                    <div class="qty-with-price">
+                                      <span>{{""|return_currency_wise_symbol:request}}{{product.price|return_currency_wise_ammount:request}}
+                                        &nbsp; &nbsp; X &nbsp; &nbsp; {{product.quantity}} </span>
+                                      {% comment %} <a href="{% url 'delete_cart_product_form_header_button' product.variant_id  %} "><i
+                                          class="fas fa-times"></i></a> {% endcomment %}
+                                    </div>
+                                  </div>
+                              </li>
+                            {% endfor %}
+                            </ul>
+                            </div>
+                          <div class="cart-btn">
+                            <h6 class="cart-total">
+                              <span class="font-light">Total:</span> $542.00
+                            </h6>
+                            <button onclick="location.href = '/cart_page';" type="button"
+                              class="btn btn-solid-default btn-block">
+                              Proceed to payment
+                            </button>
+                          </div>
+
+                          {% endif %}
+                      
+                    {% endif %}
+                  </div>
+                </li>
+              </ul>
+            </div>
+
+            {% include 'components/header/components/search-header.html' %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+
+<script id="my-data">
+  document.getElementById("currency-selection").addEventListener("change", function () {
+    var dropdown = document.getElementById("currency-selection");
+    var currencyId = dropdown.options[dropdown.selectedIndex].value;
+    var csrftoken = getCookie("csrftoken");
+    var url = "{% url 'set_currency_to_session' %}";
+
+    fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+        "X-CSRFToken": csrftoken,
+      },
+      body: JSON.stringify({
+        currencyId: currencyId,
+      }),
+    })
+    location.reload();
+
+  });
+</script>

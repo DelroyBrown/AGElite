@@ -1,0 +1,100 @@
+{% load static %}
+{% load sass_tags %}
+{% load custom_templatetags %}
+{% load mathfilters %}
+
+{% block vegetable-product-section %}
+
+
+    <!-- Product Section Start -->
+    <section class="ratio_90">
+        <div class="container">
+            <div class="row">
+                <div class="product-wrapper slide-6">
+                    {% for product in vegetable_products %}
+                    <div>
+                        <div class="product-box product-box6">
+                            <div class="img-wrapper squre-image">
+                                <div class="front-img">
+                                    <a href="{% url 'left_slidebar' product.id %}">
+                                        <img loading="lazy" class="img-fluid bg-img blur-up lazyload" alt=""
+                                            src="{{product.productImageFront}}">
+                                    </a>
+                                </div>
+                                <div class="labels label-block theme-color">
+                                    <span class="label-7">
+                                        {% if product.productDiscount|to_int == 0 %}
+                                        {% else %}
+                                        {% if product.productType == "Classified" %}
+                                        <span class="label label-theme">{{product.product_discount_range}} </span>
+                                        {% else %}
+                                        {% comment %} {% if product.product_discount_range.productVariantDiscount|to_int > 0|to_int %} {% endcomment %}
+                                        <span class="label label-theme">{{product.product_discount_range}} </span>
+                                        {% comment %} {% endif %} {% endcomment %}
+                                        {% endif %}
+                                        {% endif %}
+                                    </span>
+                                </div>
+                                <div class="cart-info cart-bag">
+                                    <div class="cart-contain">
+                                        <a href="{% url 'add_to_cart' product.id|return_first_product_variant 1 %}" class="addtocart-btn" >
+                                            {% comment %} data-bs-toggle="modal" data-bs-target="#addtocart" {% endcomment %}
+                                            <i data-feather="shopping-bag"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="product-detail"><a href="{% url 'left_slidebar' product.id %}">
+                                    <h5>{{product.productName}}</h5>
+                                </a>
+                                <ul class="rating mt-1">
+                                   <!-- ------------------------------------------------------------------- -->
+                                   {% if product.productFinalRating|to_int < 5|to_int %} 
+                                   {% for x in product.productFinalRating|times %} <li>
+                                       <a class="fas fa-star theme-color" id="productOfStar" href="{% url 'left_slidebar' product.id %}"></a>
+                                       </li>
+                                       {% endfor %}
+
+                                       {% with number1=5|to_int number2=product.productFinalRating|to_int %}
+                                       {% with number3=number1|sub:number2 %}
+
+
+                                       {% for x in number3|times %}
+                                       <li>
+                                           <i class="fas fa-star"></i>
+                                       </li>
+                                       {% endfor %}
+
+                                       {% endwith %}
+                                       {% endwith %}
+
+                                       {% else %}
+                                       <li>
+                                           <i class="fas fa-star theme-color"></i>
+                                       </li>
+                                       <li>
+                                           <i class="fas fa-star theme-color"></i>
+                                       </li>
+                                       <li>
+                                           <i class="fas fa-star theme-color"></i>
+                                       </li>
+                                       <li>
+                                           <i class="fas fa-star theme-color"></i>
+                                       </li>
+                                       <li>
+                                           <i class="fas fa-star theme-color"></i>
+                                       </li>
+                                       {% endif %}
+                                       <!-- ------------------------------------------------------------------- -->
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Product Section End -->
+
+{% endblock vegetable-product-section %}

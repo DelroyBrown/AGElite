@@ -1,0 +1,78 @@
+{% load static %}
+{% load sass_tags %}
+{% load custom_templatetags %}
+{% load mathfilters %}
+
+
+<!-- banner section start -->
+<section class="ratio_landscape banner-style-2">
+    <div class="container">
+        <div class="row gy-3">
+            {% for first_banner in banner_list|slice:":1"  %}
+            
+            <div class="col-xl-5 col-lg-4 col-md-6 custom-col">
+                <div class="collection-banner text-center">
+                    <div class="banner-img">
+                        <img loading="lazy" src="{{first_banner.bannerImage}}" class="bg-img blur-up lazyload" alt="">
+                    </div>
+                    <div class="banner-detail">
+                        <a href="{% url 'add_to_wishlist' first_banner.bannerProduct.id %}" class="heart-wishlist">
+                            <i class="far fa-heart"></i>
+                        </a>
+                        <span class="font-dark-30">{{first_banner.bannerProduct.productVariantDiscount}}% <span>OFF</span></span>
+                    </div>
+                    <a href="{% url 'shop_left_slidebar' %}" class="contain-banner contain-center bottom-0">
+                        <div class="banner-content with-bg">
+                            <h2 class="mb-2">{{first_banner.bannerProduct.variantProduct.productName}}</h2>
+                            <span>{{first_banner.titleOne}}</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            {% endfor %}
+
+
+            <div class="col-xl-3 col-lg-4 order-lg-0 order-md-1 order-0">
+                <div class="collection-banner text-center collection-center p-0">
+                    <div class="banner-img">
+                        <img loading="lazy" src="{% static 'assets/images/vegetable/percentage.jpg' %}" class="bg-img blur-up lazyload" alt="">
+                    </div>
+                    <div class="contain-banner contain-center bottom-0">
+                        <div class="banner-content p-2">
+                            <h6 class="theme-color mb-2">Get Rewarded</h6>
+                            <h2>Earn 10% </h2>
+                            <h2>Back Reward</h2>
+                            <p class="mt-2">Valid online & in-store with select styles.</p>
+                            <button onclick="location.href = '{% url 'shop_left_slidebar' %}';"
+                                class="btn btn-solid-default">Learn more</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {% for last_banner in banner_list|slice:"-1:"  %}
+
+            <div class="col-xl-5 col-lg-4 col-md-6 custom-col">
+                <div class="collection-banner text-center">
+                    <div class="banner-img">
+                        <img loading="lazy" src="{{last_banner.bannerImage}}" class="bg-img blur-up lazyload" alt="">
+                    </div>
+                    <div class="banner-detail">
+                        <a href="{% url 'add_to_wishlist' last_banner.bannerProduct.id %}" class="heart-wishlist">
+                            <i class="far fa-heart"></i>
+                        </a>
+                        <span class="font-dark-30">{{last_banner.bannerProduct.productVariantDiscount}}% <span>OFF</span></span>
+                    </div>
+                    <a href="{% url 'shop_left_slidebar' %}" class="contain-banner contain-center bottom-0">
+                        <div class="banner-content with-bg">
+                            <h2 class="mb-2">{{last_banner.bannerProduct.variantProduct.productName}} </h2>
+                            <span>{{last_banner.titleOne}}</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+<!-- banner section end -->

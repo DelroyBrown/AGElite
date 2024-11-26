@@ -1,0 +1,40 @@
+{% load static %}
+{% load sass_tags %}
+
+
+<!-- mobile fix menu start -->
+<div class="mobile-menu d-sm-none">
+  <ul> 
+    <li>
+      <a href="{% url 'index_default' %}" class="active">
+        <i data-feather="home"></i>
+        <span>Home</span>
+      </a>
+    </li>
+    <li>
+      <a href="javascript:void(0)" class="toggle-category">
+        <i data-feather="align-justify"></i>
+        <span>Category</span>
+      </a>
+    </li>
+    <li>
+      <a href="{% url 'cart_page' %}">
+        <i data-feather="shopping-bag"></i>
+        <span>Cart</span>
+      </a>
+    </li>
+    <li>
+      <a href="{% url 'wishlist_page' %}">
+        <i data-feather="heart"></i>
+        <span>Wishlist</span>
+      </a>
+    </li>
+    <li>
+      <a href="{% url 'user_dashboard'  %}">
+        <i data-feather="user"></i>
+        <span>Account</span>
+      </a>
+    </li>
+  </ul>
+</div>
+<!-- mobile fix menu end -->

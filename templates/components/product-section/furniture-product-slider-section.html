@@ -1,0 +1,663 @@
+{% load static %} 
+{% load sass_tags %}
+{% load custom_templatetags %}
+{% load mathfilters %}
+{% block product-slider-section %}
+<!-- Product Slider Section Start -->
+<section class="product-slider overflow-hidden">
+  <div>
+    <div class="container">
+      <div class="row g-3">
+        <div class="col-lg-4">
+          <div class="title-3 pb-4 title-border">
+            <h2>Most Popular</h2>
+            <h5 class="theme-color">Our Collection</h5>
+          </div>
+
+          <div class="product-slider round-arrow">
+            <div>
+              <div class="row g-3">
+                {% for product in most_popular|slice:":4" %}
+                <div class="col-lg-12 col-md-6 col-12">
+                  <div class="product-image">
+                    <a href="{% url 'left_slidebar' product.id %}">
+                      <img
+                        loading="lazy"
+                        src="{{product.productImageFront}}"
+                        class="blur-up lazyload"
+                        alt=""
+                      />
+                    </a>
+                    <div class="product-details">
+                      <a href="{% url 'left_slidebar' product.id %}">
+                        <h6 class="font-light">
+                          {{product.productDescription|safe}}
+                        </h6>
+                        <h3>{{product.productName}}</h3>
+
+                        <h4 class="font-light mt-1">
+                          <del>
+                            {% if product.productType == "Simple" %}
+                            {{""|return_currency_wise_symbol:request}}{{product.product_actual_price_range|return_currency_wise_ammount:request}}
+                            {% else %}
+                            {{product.product_actual_price_range|return_currency_wise_ammount_range:request}}
+                            {% endif %}
+                          </del>
+
+                          {% if product.productType == "Simple" %}
+                          <span class="theme-color"
+                            >{{""|return_currency_wise_symbol:request}}{{product.product_price_range|return_currency_wise_ammount:request}}</span
+                          >
+                          {% else %}
+                          <span class="theme-color"
+                            >{{product.product_price_range|return_currency_wise_ammount_range:request}}</span
+                          >
+                          {% endif %}
+                        </h4>
+                        <div class="cart-wrap">
+                          <ul>
+                            <li
+                              data-bs-toggle="tooltip"
+                              data-bs-placement="top"
+                              title="Buy"
+                            >
+                              <a
+                                href="{% url 'add_to_cart' product.id|return_first_product_variant 1 %}"
+                                class="addtocart-btn"
+                              >
+                                {% comment %} data-bs-toggle="modal"
+                                data-bs-target="#addtocart"> {% endcomment %}
+                                <i data-feather="shopping-bag"></i>
+                              </a>
+                            </li>
+
+                            <li
+                              data-bs-toggle="tooltip"
+                              data-bs-placement="top"
+                              title="Quick View"
+                            >
+                              <a
+                                onclick="handleQuickView({'productId':'{{product.id}}','productVariantId':'{{product.id|return_first_product_variant}}'})"
+                                data-bs-toggle="modal"
+                                href="#quick-view"
+                              >
+                                <i data-feather="eye"></i>
+                              </a>
+                            </li>
+
+                            <li
+                              data-bs-toggle="tooltip"
+                              data-bs-placement="top"
+                              title="Compare"
+                            >
+                              <a
+                                href="{% url 'compare_products' product.id|return_first_product_variant %}"
+                              >
+                                <i data-feather="refresh-cw"></i>
+                              </a>
+                            </li>
+
+                            <li
+                              data-bs-toggle="tooltip"
+                              data-bs-placement="top"
+                              title="Wishlist"
+                            >
+                              <a
+                                href="{% url 'add_to_wishlist' product.id|return_first_product_variant %}"
+                                class="wishlist"
+                              >
+                                <i data-feather="heart"></i>
+                              </a>
+                            </li>
+                          </ul>
+                        </div>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+                {% endfor %}
+              </div>
+            </div>
+
+            <div>
+              <div class="row g-3">
+                {% for product in most_popular|slice:"4:8" %}
+                <div class="col-lg-12 col-md-6 col-12">
+                  <div class="product-image">
+                    <a href="{% url 'left_slidebar' product.id %}">
+                      <img
+                        loading="lazy"
+                        src="{{product.productImageFront}}"
+                        class="blur-up lazyload"
+                        alt=""
+                      />
+                    </a>
+                    <div class="product-details">
+                      <a href="{% url 'left_slidebar' product.id %}">
+                        <h6 class="font-light">
+                          {{product.productDescription|safe}}
+                        </h6>
+                        <h3>{{product.productName}}</h3>
+
+                        <h4 class="font-light mt-1">
+                          <del>
+                            {% if product.productType == "Simple" %}
+                            {{""|return_currency_wise_symbol:request}}{{product.product_actual_price_range|return_currency_wise_ammount:request}}
+                            {% else %}
+                            {{product.product_actual_price_range|return_currency_wise_ammount_range:request}}
+                            {% endif %}
+                          </del>
+
+                          {% if product.productType == "Simple" %}
+                          <span class="theme-color"
+                            >{{""|return_currency_wise_symbol:request}}{{product.product_price_range|return_currency_wise_ammount:request}}</span
+                          >
+                          {% else %}
+                          <span class="theme-color"
+                            >{{product.product_price_range|return_currency_wise_ammount_range:request}}</span
+                          >
+                          {% endif %}
+                        </h4>
+                        <div class="cart-wrap">
+                          <ul>
+                            <li
+                              data-bs-toggle="tooltip"
+                              data-bs-placement="top"
+                              title="Buy"
+                            >
+                              <a
+                                href="{% url 'add_to_cart' product.id|return_first_product_variant 1 %}"
+                                class="addtocart-btn"
+                              >
+                                {% comment %} data-bs-toggle="modal"
+                                data-bs-target="#addtocart"> {% endcomment %}
+                                <i data-feather="shopping-bag"></i>
+                              </a>
+                            </li>
+
+                            <li
+                              data-bs-toggle="tooltip"
+                              data-bs-placement="top"
+                              title="Quick View"
+                            >
+                              <a
+                                onclick="handleQuickView({'productId':'{{product.id}}','productVariantId':'{{product.id|return_first_product_variant}}'})"
+                                data-bs-toggle="modal"
+                                href="#quick-view"
+                              >
+                                <i data-feather="eye"></i>
+                              </a>
+                            </li>
+
+                            <li
+                              data-bs-toggle="tooltip"
+                              data-bs-placement="top"
+                              title="Compare"
+                            >
+                              <a
+                                href="{% url 'compare_products' product.id|return_first_product_variant %}"
+                              >
+                                <i data-feather="refresh-cw"></i>
+                              </a>
+                            </li>
+
+                            <li
+                              data-bs-toggle="tooltip"
+                              data-bs-placement="top"
+                              title="Wishlist"
+                            >
+                              <a
+                                href="{% url 'add_to_wishlist' product.id|return_first_product_variant %}"
+                                class="wishlist"
+                              >
+                                <i data-feather="heart"></i>
+                              </a>
+                            </li>
+                          </ul>
+                        </div>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-4">
+          <div class="title-3 pb-4 title-border">
+            <h2>Recent Popular</h2>
+            <h5 class="theme-color">Our Collection</h5>
+          </div>
+
+          <div class="product-slider round-arrow">
+            <div>
+              <div class="row g-3">
+                {% for product in furniture_products|slice:":4" %}
+                <div class="col-lg-12 col-md-6 col-12">
+                  <div class="product-image">
+                    <a href="{% url 'left_slidebar' product.id %}">
+                      <img
+                        loading="lazy"
+                        src="{{product.productImageFront}}"
+                        class="blur-up lazyload"
+                        alt=""
+                      />
+                    </a>
+                    <div class="product-details">
+                      <a href="{% url 'left_slidebar' product.id %}">
+                        <h6 class="font-light">
+                          {{product.productDescription|safe}}
+                        </h6>
+                        <h3>{{product.productName}}</h3>
+
+                        <h4 class="font-light mt-1">
+                          <del>
+                            {% if product.productType == "Simple" %}
+                            {{""|return_currency_wise_symbol:request}}{{product.product_actual_price_range|return_currency_wise_ammount:request}}
+                            {% else %}
+                            {{product.product_actual_price_range|return_currency_wise_ammount_range:request}}
+                            {% endif %}
+                          </del>
+
+                          {% if product.productType == "Simple" %}
+                          <span class="theme-color"
+                            >{{""|return_currency_wise_symbol:request}}{{product.product_price_range|return_currency_wise_ammount:request}}</span
+                          >
+                          {% else %}
+                          <span class="theme-color"
+                            >{{product.product_price_range|return_currency_wise_ammount_range:request}}</span
+                          >
+                          {% endif %}
+                        </h4>
+                        <div class="cart-wrap">
+                          <ul>
+                            <li
+                              data-bs-toggle="tooltip"
+                              data-bs-placement="top"
+                              title="Buy"
+                            >
+                              <a
+                                href="{% url 'add_to_cart' product.id|return_first_product_variant 1 %}"
+                                class="addtocart-btn"
+                              >
+                                {% comment %} data-bs-toggle="modal"
+                                data-bs-target="#addtocart"> {% endcomment %}
+                                <i data-feather="shopping-bag"></i>
+                              </a>
+                            </li>
+
+                            <li
+                              data-bs-toggle="tooltip"
+                              data-bs-placement="top"
+                              title="Quick View"
+                            >
+                              <a
+                                onclick="handleQuickView({'productId':'{{product.id}}','productVariantId':'{{product.id|return_first_product_variant}}'})"
+                                data-bs-toggle="modal"
+                                href="#quick-view"
+                              >
+                                <i data-feather="eye"></i>
+                              </a>
+                            </li>
+
+                            <li
+                              data-bs-toggle="tooltip"
+                              data-bs-placement="top"
+                              title="Compare"
+                            >
+                              <a
+                                href="{% url 'compare_products' product.id|return_first_product_variant %}"
+                              >
+                                <i data-feather="refresh-cw"></i>
+                              </a>
+                            </li>
+
+                            <li
+                              data-bs-toggle="tooltip"
+                              data-bs-placement="top"
+                              title="Wishlist"
+                            >
+                              <a
+                                href="{% url 'add_to_wishlist' product.id|return_first_product_variant %}"
+                                class="wishlist"
+                              >
+                                <i data-feather="heart"></i>
+                              </a>
+                            </li>
+                          </ul>
+                        </div>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+                {% endfor %}
+              </div>
+            </div>
+
+            <div>
+              <div class="row g-3">
+                {% for product in furniture_products|slice:"4:" %}
+                <div class="col-lg-12 col-md-6 col-12">
+                  <div class="product-image">
+                    <a href="{% url 'left_slidebar' product.id %}">
+                      <img
+                        loading="lazy"
+                        src="{{product.productImageFront}}"
+                        class="blur-up lazyload"
+                        alt=""
+                      />
+                    </a>
+                    <div class="product-details">
+                      <a href="{% url 'left_slidebar' product.id %}">
+                        <h6 class="font-light">
+                          {{product.productDescription|safe}}
+                        </h6>
+                        <h3>{{product.productName}}</h3>
+                        <h4 class="font-light mt-1">
+                          <del>
+                            {% if product.productType == "Simple" %}
+                            {{""|return_currency_wise_symbol:request}}{{product.product_actual_price_range|return_currency_wise_ammount:request}}
+                            {% else %}
+                            {{product.product_actual_price_range|return_currency_wise_ammount_range:request}}
+                            {% endif %}
+                          </del>
+
+                          {% if product.productType == "Simple" %}
+                          <span class="theme-color"
+                            >{{""|return_currency_wise_symbol:request}}{{product.product_price_range|return_currency_wise_ammount:request}}</span
+                          >
+                          {% else %}
+                          <span class="theme-color"
+                            >{{product.product_price_range|return_currency_wise_ammount_range:request}}</span
+                          >
+                          {% endif %}
+                        </h4>
+                        <div class="cart-wrap">
+                          <ul>
+                            <li
+                              data-bs-toggle="tooltip"
+                              data-bs-placement="top"
+                              title="Buy"
+                            >
+                              <a
+                                href="{% url 'add_to_cart' product.id|return_first_product_variant 1 %}"
+                                class="addtocart-btn"
+                              >
+                                {% comment %} data-bs-toggle="modal"
+                                data-bs-target="#addtocart"> {% endcomment %}
+                                <i data-feather="shopping-bag"></i>
+                              </a>
+                            </li>
+
+                            <li
+                              data-bs-toggle="tooltip"
+                              data-bs-placement="top"
+                              title="Quick View"
+                            >
+                              <a
+                                onclick="handleQuickView({'productId':'{{product.id}}','productVariantId':'{{product.id|return_first_product_variant}}'})"
+                                data-bs-toggle="modal"
+                                href="#quick-view"
+                              >
+                                <i data-feather="eye"></i>
+                              </a>
+                            </li>
+
+                            <li
+                              data-bs-toggle="tooltip"
+                              data-bs-placement="top"
+                              title="Compare"
+                            >
+                              <a
+                                href="{% url 'compare_products' product.id|return_first_product_variant %}"
+                              >
+                                <i data-feather="refresh-cw"></i>
+                              </a>
+                            </li>
+
+                            <li
+                              data-bs-toggle="tooltip"
+                              data-bs-placement="top"
+                              title="Wishlist"
+                            >
+                              <a
+                                href="{% url 'add_to_wishlist' product.id|return_first_product_variant %}"
+                                class="wishlist"
+                              >
+                                <i data-feather="heart"></i>
+                              </a>
+                            </li>
+                          </ul>
+                        </div>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-4">
+          <div class="title-3 pb-4 title-border">
+            <h2>Most Popular</h2>
+            <h5 class="theme-color">Our Collection</h5>
+          </div>
+
+          <div class="product-slider round-arrow">
+            <div>
+              <div class="row g-3">
+                {% for product in most_popular|slice:":4" %}
+                <div class="col-lg-12 col-md-6 col-12">
+                  <div class="product-image">
+                    <a href="{% url 'left_slidebar' product.id %}">
+                      <img
+                        loading="lazy"
+                        src="{{product.productImageFront}}"
+                        class="blur-up lazyload"
+                        alt=""
+                      />
+                    </a>
+                    <div class="product-details">
+                      <a href="{% url 'left_slidebar' product.id %}">
+                        <h6 class="font-light">
+                          {{product.productDescription|safe}}
+                        </h6>
+                        <h3>{{product.productName}}</h3>
+                        <h4 class="font-light mt-1">
+                          <del>
+                            {% if product.productType == "Simple" %}
+                            {{""|return_currency_wise_symbol:request}}{{product.product_actual_price_range|return_currency_wise_ammount:request}}
+                            {% else %}
+                            {{product.product_actual_price_range|return_currency_wise_ammount_range:request}}
+                            {% endif %}
+                          </del>
+
+                          {% if product.productType == "Simple" %}
+                          <span class="theme-color"
+                            >{{""|return_currency_wise_symbol:request}}{{product.product_price_range|return_currency_wise_ammount:request}}</span
+                          >
+                          {% else %}
+                          <span class="theme-color"
+                            >{{product.product_price_range|return_currency_wise_ammount_range:request}}</span
+                          >
+                          {% endif %}
+                        </h4>
+                        <div class="cart-wrap">
+                          <ul>
+                            <li
+                              data-bs-toggle="tooltip"
+                              data-bs-placement="top"
+                              title="Buy"
+                            >
+                              <a
+                                href="{% url 'add_to_cart' product.id|return_first_product_variant 1 %}"
+                                class="addtocart-btn"
+                              >
+                                {% comment %} data-bs-toggle="modal"
+                                data-bs-target="#addtocart"> {% endcomment %}
+                                <i data-feather="shopping-bag"></i>
+                              </a>
+                            </li>
+
+                            <li
+                              data-bs-toggle="tooltip"
+                              data-bs-placement="top"
+                              title="Quick View"
+                            >
+                              <a
+                                onclick="handleQuickView({'productId':'{{product.id}}','productVariantId':'{{product.id|return_first_product_variant}}'})"
+                                data-bs-toggle="modal"
+                                href="#quick-view"
+                              >
+                                <i data-feather="eye"></i>
+                              </a>
+                            </li>
+
+                            <li
+                              data-bs-toggle="tooltip"
+                              data-bs-placement="top"
+                              title="Compare"
+                            >
+                              <a
+                                href="{% url 'compare_products' product.id|return_first_product_variant %}"
+                              >
+                                <i data-feather="refresh-cw"></i>
+                              </a>
+                            </li>
+
+                            <li
+                              data-bs-toggle="tooltip"
+                              data-bs-placement="top"
+                              title="Wishlist"
+                            >
+                              <a
+                                href="{% url 'add_to_wishlist' product.id|return_first_product_variant %}"
+                                class="wishlist"
+                              >
+                                <i data-feather="heart"></i>
+                              </a>
+                            </li>
+                          </ul>
+                        </div>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+                {% endfor %}
+              </div>
+            </div>
+
+            <div>
+              <div class="row g-3">
+                {% for product in most_popular|slice:"4:8" %}
+                <div class="col-lg-12 col-md-6 col-12">
+                  <div class="product-image">
+                    <a href="{% url 'left_slidebar' product.id %}">
+                      <img
+                        loading="lazy"
+                        src="{{product.productImageFront.url}}"
+                        class="blur-up lazyload"
+                        alt=""
+                      />
+                    </a>
+                    <div class="product-details">
+                      <a href="{% url 'left_slidebar' product.id %}">
+                        <h6 class="font-light">
+                          {{product.productDescription|safe}}
+                        </h6>
+                        <h3>{{product.productName}}</h3>
+                        <h4 class="font-light mt-1">
+                          <del>
+                            {% if product.productType == "Simple" %}
+                            {{""|return_currency_wise_symbol:request}}{{product.product_actual_price_range|return_currency_wise_ammount:request}}
+                            {% else %}
+                            {{product.product_actual_price_range|return_currency_wise_ammount_range:request}}
+                            {% endif %}
+                          </del>
+
+                          {% if product.productType == "Simple" %}
+                          <span class="theme-color"
+                            >{{""|return_currency_wise_symbol:request}}{{product.product_price_range|return_currency_wise_ammount:request}}</span
+                          >
+                          {% else %}
+                          <span class="theme-color"
+                            >{{product.product_price_range|return_currency_wise_ammount_range:request}}</span
+                          >
+                          {% endif %}
+                        </h4>
+                        <div class="cart-wrap">
+                          <ul>
+                            <li
+                              data-bs-toggle="tooltip"
+                              data-bs-placement="top"
+                              title="Buy"
+                            >
+                              <a
+                                href="{% url 'add_to_cart' product.id|return_first_product_variant 1 %}"
+                                class="addtocart-btn"
+                              >
+                                {% comment %} data-bs-toggle="modal"
+                                data-bs-target="#addtocart"> {% endcomment %}
+                                <i data-feather="shopping-bag"></i>
+                              </a>
+                            </li>
+
+                            <li
+                              data-bs-toggle="tooltip"
+                              data-bs-placement="top"
+                              title="Quick View"
+                            >
+                              <a
+                                onclick="handleQuickView({'productId':'{{product.id}}','productVariantId':'{{product.id|return_first_product_variant}}'})"
+                                data-bs-toggle="modal"
+                                href="#quick-view"
+                              >
+                                <i data-feather="eye"></i>
+                              </a>
+                            </li>
+
+                            <li
+                              data-bs-toggle="tooltip"
+                              data-bs-placement="top"
+                              title="Compare"
+                            >
+                              <a
+                                href="{% url 'compare_products' product.id|return_first_product_variant %}"
+                              >
+                                <i data-feather="refresh-cw"></i>
+                              </a>
+                            </li>
+
+                            <li
+                              data-bs-toggle="tooltip"
+                              data-bs-placement="top"
+                              title="Wishlist"
+                            >
+                              <a
+                                href="{% url 'add_to_wishlist' product.id|return_first_product_variant %}"
+                                class="wishlist"
+                              >
+                                <i data-feather="heart"></i>
+                              </a>
+                            </li>
+                          </ul>
+                        </div>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Product Slider Section End -->
+{% endblock product-slider-section %}

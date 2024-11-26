@@ -1,0 +1,201 @@
+{% load static %}
+{% load sass_tags %}
+{% load custom_templatetags %}
+
+<!-- instagram shop section start -->
+<section class="ratio_square">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col">
+                <div class="title title-2 text-center">
+                    <h2>Instagram Shop</h2>
+                    <h5 class="text-color">New Collection</h5>
+                </div>
+                <div class="product-style-1 instagram-2 product-wrapper">
+                    <div class="insta-slider instagram-wrap">
+                        {% if allbanners %}
+                        {% for banner in allbanners %}
+                        {% if banner.bannerType|to_str == 'Instagram' %}
+                        <div>
+                            <div class="product-box">
+                                <div class="img-wrapper">
+                                    <div class="top-wishlist product-color">
+                                        <a href="{% url 'add_to_wishlist' banner.bannerProduct.variantProduct.id|return_first_product_variant %}" class="heart-wishlist heart-color ms-auto wishlist">
+                                            <i class="far fa-heart"></i>
+                                        </a>
+                                    </div>
+                                    <div class="share share-box share-opacity">
+                                        <span class="share-plus share-plus-color">+</span>
+                                        <span>Share</span>
+                                    </div>
+                                    <a href="javascript:void(0)" class="text-center">
+                                        <img loading="lazy" src="{{banner.bannerImage}}"
+                                            class="bg-img blur-up lazyload" alt="">
+                                    </a>
+                                </div>
+                                <div class="insta-hover insta-spacing text-center">
+                                    <div>
+                                        <h5>New Offer {{banner.bannerProduct.productVariantDiscount}}% Discount</h5>
+                                        <h3 class="text-hide">{{banner.bannerProduct.variantProduct.productName}} {{""|return_currency_wise_symbol:request}}{{banner.bannerProduct.productVariantFinalPrice|return_currency_wise_ammount:request}}</h3>
+                                        <button onclick="location.href = '{% url 'left_slidebar' banner.bannerProduct.variantProduct.id %}';" type="button"
+                                            class="btn btn-light-white">Shop now <i class="fas fa-chevron-right ms-2"></i></button>
+                                   
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+                        {% endfor %}
+                        {% comment %} {% else %} {% endcomment %}
+                        {% comment %} <div>
+                            <div class="product-box">
+                                <div class="img-wrapper">
+                                    <div class="top-wishlist product-color">
+                                        <a href="wishlist.html" class="heart-wishlist heart-color ms-auto">
+                                            <i class="far fa-heart"></i>
+                                        </a>
+                                    </div>
+                                    <div class="share share-box share-opacity">
+                                        <span class="share-plus share-plus-color">+</span>
+                                        <span>Share</span>
+                                    </div>
+                                    <a href="javascript:void(0)" class="text-center">
+                                        <img loading="lazy" src="{% static 'assets/images/fashion/instagram/1.jpg' %}"
+                                            class="bg-img blur-up lazyload" alt="">
+                                    </a>
+                                </div>
+                                <div class="insta-hover insta-spacing text-center">
+                                    <div>
+                                        <h5>New Offer -56% Discount</h5>
+                                        <h3 class="text-hide">Women T-shirt From $35</h3>
+                                        <button onclick="location.href = 'shop-left-sidebar.html';" type="button"
+                                            class="btn btn-light-white">Shop now <i
+                                                class="fas fa-chevron-right ms-2"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="product-box">
+                                <div class="img-wrapper">
+                                    <div class="top-wishlist product-color">
+                                        <a href="wishlist.html" class="heart-wishlist heart-color ms-auto">
+                                            <i class="far fa-heart"></i>
+                                        </a>
+                                    </div>
+                                    <div class="share share-box share-opacity">
+                                        <span class="share-plus share-plus-color">+</span>
+                                        <span>Share</span>
+                                    </div>
+                                    <a href="javascript:void(0)" class="text-center">
+                                        <img loading="lazy" src="{% static 'assets/images/fashion/instagram/2.jpg' %}"
+                                            class="bg-img blur-up lazyload" alt="">
+                                    </a>
+                                </div>
+                                <div class="insta-hover insta-spacing text-center">
+                                    <div>
+                                        <h5>New Offer -56% Discount</h5>
+                                        <h3 class="text-hide">Women T-shirt From $35</h3>
+                                        <button onclick="location.href = 'shop-left-sidebar.html';" type="button"
+                                            class="btn btn-light-white">Shop now <i
+                                                class="fas fa-chevron-right ms-2"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="product-box">
+                                <div class="img-wrapper">
+                                    <div class="top-wishlist product-color">
+                                        <a href="wishlist.html" class="heart-wishlist heart-color ms-auto">
+                                            <i class="far fa-heart"></i>
+                                        </a>
+                                    </div>
+                                    <div class="share share-box share-opacity">
+                                        <span class="share-plus share-plus-color">+</span>
+                                        <span>Share</span>
+                                    </div>
+                                    <a href="javascript:void(0)" class="text-center">
+                                        <img loading="lazy" src="{% static 'assets/images/fashion/instagram/3.jpg' %}"
+                                            class="bg-img blur-up lazyload" alt="">
+                                    </a>
+                                </div>
+                                <div class="insta-hover insta-spacing text-center">
+                                    <div>
+                                        <h5>New Offer -56% Discount</h5>
+                                        <h3 class="text-hide">Women T-shirt From $35</h3>
+                                        <button onclick="location.href = 'shop-left-sidebar.html';" type="button"
+                                            class="btn btn-light-white">Shop now <i
+                                                class="fas fa-chevron-right ms-2"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>  
+
+                        <div>
+                            <div class="product-box">
+                                <div class="img-wrapper">
+                                    <div class="top-wishlist product-color">
+                                        <a href="wishlist.html" class="heart-wishlist heart-color ms-auto">
+                                            <i class="far fa-heart"></i>
+                                        </a>
+                                    </div>
+                                    <div class="share share-box share-opacity">
+                                        <span class="share-plus share-plus-color">+</span>
+                                        <span>Share</span>
+                                    </div>
+                                    <a href="javascript:void(0)" class="text-center">
+                                        <img loading="lazy" src="{% static 'assets/images/fashion/instagram/4.jpg' %}"
+                                            class="bg-img blur-up lazyload" alt="">
+                                    </a>
+                                </div>
+                                <div class="insta-hover insta-spacing text-center">
+                                    <div>
+                                        <h5>New Offer -56% Discount</h5>
+                                        <h3 class="text-hide">Women T-shirt From $35</h3>
+                                        <button onclick="location.href = 'shop-left-sidebar.html';" type="button"
+                                            class="btn btn-light-white">Shop now <i
+                                                class="fas fa-chevron-right ms-2"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="product-box">
+                                <div class="img-wrapper">
+                                    <div class="top-wishlist product-color">
+                                        <a href="wishlist.html" class="heart-wishlist heart-color ms-auto">
+                                            <i class="far fa-heart"></i>
+                                        </a>
+                                    </div>
+                                    <div class="share share-box share-opacity">
+                                        <span class="share-plus share-plus-color">+</span>
+                                        <span>Share</span>
+                                    </div>
+                                    <a href="javascript:void(0)" class="text-center">
+                                        <img loading="lazy" src="{% static 'assets/images/fashion/instagram/5.jpg' %}"
+                                            class="bg-img blur-up lazyload" alt="">
+                                    </a>
+                                </div>
+                                <div class="insta-hover insta-spacing text-center">
+                                    <div>
+                                        <h5>New Offer -56% Discount</h5>
+                                        <h3 class="text-hide">Women T-shirt From $35</h3>
+                                        <button onclick="location.href = 'shop-left-sidebar.html';" type="button"
+                                            class="btn btn-light-white">Shop now <i
+                                                class="fas fa-chevron-right ms-2"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> {% endcomment %}
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- instagram shop section end -->

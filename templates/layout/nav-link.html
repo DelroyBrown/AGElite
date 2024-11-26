@@ -1,0 +1,328 @@
+{% load static %}
+{% load sass_tags %}
+
+<li class="mega-menu dropdown home-menu">
+    <a href="javascript:void(0)" class="nav-link menu-title">home</a>
+    <div class="mega-menu-container menu-content">
+        <div class="container-fluid">
+            <div class="row">
+                {% comment %} <div class="col mega-box">
+                    <div class="link-section">
+                        <div class="opensubmegamenu">
+                            <ul>
+                                <li>
+                                    <a href="{% url 'index_default' %}" class="megamenu-image">
+                                        <img loading="lazy" src="{% static 'assets/images/demo-image/fashion.jpg' %}"
+                                            class="img-fluid blur-up lazyload" alt="">
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="megamenu-image-title pb-0">
+                            <h5 class="mb-0">Fashion Demo</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col mega-box">
+                    <div class="link-section">
+                        <div class="opensubmegamenu">
+                            <ul>
+                                <li>
+                                    <a href="{% url 'flower_demo' %}" class="megamenu-image">
+                                        <img loading="lazy" src="{% static 'assets/images/demo-image/flower.jpg' %}"
+                                            class="img-fluid blur-up lazyload" alt="">
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="megamenu-image-title pb-0">
+                            <h5 class="mb-0">Flowers Demo</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col mega-box">
+                    <div class="link-section">
+                        <div class="opensubmegamenu">
+                            <ul>
+                                <li>
+                                    <a href="{% url 'furniture_demo' %}" class="megamenu-image">
+                                        <img loading="lazy" src="{% static 'assets/images/demo-image/furniture.jpg' %}"
+                                            class="img-fluid blur-up lazyload" alt="">
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="megamenu-image-title pb-0">
+                            <h5 class="mb-0">Furniture Demo</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col mega-box">
+                    <div class="link-section">
+                        <div class="opensubmegamenu">
+                            <ul>
+                                <li>
+                                    <a href="{% url 'electronics_demo' %}" class="megamenu-image">
+                                        <img loading="lazy" src="{% static 'assets/images/demo-image/electonic.jpg' %}"
+                                            class="img-fluid blur-up lazyload" alt="">
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="megamenu-image-title pb-0">
+                            <h5 class="mb-0">Electronic Demo</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col mega-box">
+                    <div class="link-section">
+                        <div class="opensubmegamenu">
+                            <ul>
+                                <li>
+                                    <a href="{% url 'shoes_demo' %}" class="megamenu-image">
+                                        <img loading="lazy" src="{% static 'assets/images/demo-image/shoes.jpg' %}"
+                                            class="img-fluid blur-up lazyload" alt="">
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="megamenu-image-title pb-0">
+                            <h5 class="mb-0">Shoes Demo</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col mega-box">
+                    <div class="link-section">
+                        <div class="opensubmegamenu">
+                            <ul>
+                                <li>
+                                    <a href="{% url 'vegetables_demo' %}" class="megamenu-image">
+                                        <img loading="lazy" src="{% static 'assets/images/demo-image/vagetables.jpg' %}"
+                                            class="img-fluid blur-up lazyload" alt="">
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="megamenu-image-title pb-0">
+                            <h5 class="mb-0">Vegetables Demo</h5>
+                        </div>
+                    </div>
+                </div> {% endcomment %}
+
+                {% for theme in active_banner_themes %}
+
+                <div class="mega-box">  
+                    <div class="link-section">
+                        <div class="opensubmegamenu">
+                            <ul>
+                                {% if theme.bannerThemeName == 'Fashion Demo' %}
+                                <li>
+                                    <a href="{% url 'index_default' %}" class="megamenu-image">
+                                        <img loading="lazy" src="{% static 'assets/images/demo-image/fashion.jpg' %}"
+                                            class="img-fluid lazyload" alt="">
+                                    </a>
+                                </li>
+                                {% elif theme.bannerThemeName == 'Flower Demo' %}
+                                <li>
+                                    <a href="{% url 'flower_demo' %}" class="megamenu-image">
+                                        <img loading="lazy" src="{% static 'assets/images/demo-image/flower.jpg' %}"
+                                            class="img-fluid lazyload" alt="">
+                                    </a>
+                                </li>
+                                {% elif theme.bannerThemeName == 'Furniture Demo' %}
+                                <li>
+                                    <a href="{% url 'furniture_demo' %}" class="megamenu-image">
+                                        <img loading="lazy" src="{% static 'assets/images/demo-image/furniture.jpg' %}"
+                                            class="img-fluid lazyload" alt="">
+                                    </a>
+                                </li>
+                                {% elif theme.bannerThemeName == 'Electronics Demo' %}
+                                <li>
+                                    <a href="{% url 'electronics_demo' %}" class="megamenu-image">
+                                        <img loading="lazy" src="{% static 'assets/images/demo-image/electonic.jpg' %}"
+                                            class="img-fluid lazyload" alt="">
+                                    </a>
+                                </li>
+                                {% elif theme.bannerThemeName == 'Shoes Demo' %}
+                                <li>
+                                    <a href="{% url 'shoes_demo' %}" class="megamenu-image">
+                                        <img loading="lazy" src="{% static 'assets/images/demo-image/shoes.jpg' %}"
+                                            class="img-fluid lazyload" alt="">
+                                    </a>
+                                </li>
+                                {% elif theme.bannerThemeName == 'Vegetable Demo' %}
+                                <li>
+                                    <a href="{% url 'vegetables_demo' %}" class="megamenu-image">
+                                        <img loading="lazy" src="{% static 'assets/images/demo-image/vagetables.jpg' %}"
+                                            class="img-fluid lazyload" alt="">
+                                    </a>
+                                </li>
+                                {% endif %}
+                            </ul>
+                        </div>
+
+                        <div class="megamenu-image-title pb-0">
+                            <h5 class="mb-0">{{theme.bannerThemeName}}</h5>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</li>
+<li class="dropdown">
+    <a href="javascript:void(0)" class="nav-link menu-title">shop</a>
+    <ul class="nav-submenu menu-content">
+        <li>
+            <a href="{% url 'canvas_filter' %}">Shop Canvas Filter</a>
+        </li>
+        <li>
+            <a href="{% url 'category_filter' %}">Shop Category Filter</a>
+        </li>
+        <li>
+            <a href="{% url 'filter_hide' %}">Shop Filter Hide</a>
+        </li>
+        <li>
+            <a href="{% url 'shop_left_slidebar' %}">Shop Left Sidebar
+                <span>Trending</span></a>
+        </li>
+        <li>
+            <a href="{% url 'list_infinite' %}">Shop List Infinite</a>
+        </li>
+        <li>
+            <a href="{% url 'shop_list' %}">Shop List</a>
+        </li>
+        <li>
+            <a href="{% url 'shop_no_sidebar' %}">Shop No Sidebar</a>
+        </li>
+        <li>
+            <a href="{% url 'shop_right_sidebar' %}">Shop Right Sidebar</a>
+        </li>
+        <li>
+            <a href="{% url 'shop_top_filter' %}">Shop Top Filter</a>
+        </li>
+        <li>
+            <a href="{% url 'shop_with_category' %}">Shop With Category <span class="tren-budge">New</span></a>
+        </li>
+    </ul>
+</li>
+<li class="dropdown">
+    <a href="javascript:void(0)" class="nav-link menu-title">product</a>
+    <ul class="nav-submenu menu-content">
+        <li>
+            {% comment %} <a href="">Product 4 Images</a> {% endcomment %}
+            <a href="{% url 'image_4' 'd93e20a6-cbd3-4a9b-b7a8-e9031e52bca0' %}">Product 4 Images</a>
+        </li>
+        <li>
+            {% comment %} <a href="">Product 360 View</a> {% endcomment %}
+            <a href="{% url 'product_360_view' 'a2e7d080-0cee-4cad-9f5a-06410ca58f54' %}">Product 360 View</a>
+        </li>
+        <li>
+            {% comment %} <a href="">Product Bundle</a> {% endcomment %}
+            <a href="{% url 'bundle' 'a2e7d080-0cee-4cad-9f5a-06410ca58f54' %}">Product Bundle</a>
+        </li>
+        <li>
+            {% comment %} <a href="">Product Left Sidebar</a> {% endcomment %}
+            <a href="{% url 'left_slidebar' 'a2e7d080-0cee-4cad-9f5a-06410ca58f54' %}">Product Left Sidebar</a>
+        </li>
+        <li>
+            {% comment %} <a href="">Product Left thumbnail</a> {% endcomment %}
+            <a href="{% url 'left_thumbnail' 'a2e7d080-0cee-4cad-9f5a-06410ca58f54' %}">Product Left thumbnail</a>
+        </li>
+        <li>
+            {% comment %} <a href="">Product No Sidebar</a> {% endcomment %}
+            <a href="{% url 'product_no_sidebar' 'a2e7d080-0cee-4cad-9f5a-06410ca58f54' %}">Product No Sidebar</a>
+        </li>
+        <li>
+            {% comment %} <a href="">Product Right Sidebar</a> {% endcomment %}
+            <a href="{% url 'product_right_slidebar' 'a2e7d080-0cee-4cad-9f5a-06410ca58f54' %}">Product Right
+                Sidebar</a>
+        </li>
+        <li>
+            {% comment %} <a href="">Product Right Thumbnail</a> {% endcomment %}
+            <a href="{% url 'right_thumbnail' 'a2e7d080-0cee-4cad-9f5a-06410ca58f54' %}">Product Right Thumbnail</a>
+        </li>
+        <li>
+            {% comment %} <a href="">Product Sticky</a> {% endcomment %}
+            <a href="{% url 'sticky' 'a2e7d080-0cee-4cad-9f5a-06410ca58f54' %}">Product Sticky</a>
+        </li>
+        <li>
+            {% comment %} <a href="">Product Video Thumbnail</a> {% endcomment %}
+            <a href="{% url 'video_thumbnail' 'a2e7d080-0cee-4cad-9f5a-06410ca58f54' %}">Product Video Thumbnail</a>
+        </li>
+    </ul>
+</li>
+
+<li class="dropdown">
+    <a href="javascript:void(0)" class="nav-link menu-title">pages</a>
+    <ul class="nav-submenu menu-content">
+        <li>
+            <a href="{% url 'page_not_found' %}">404</a>
+        </li>
+        <li>
+            <a href="{% url 'cart_page' %}">cart</a>
+        </li>
+        <li>
+            <a href="{% url 'coming_soon' %}">coming soon<span>trending</span></a>
+        </li>
+        <li>
+            <a href="{% url 'compare_page' %}">compare</a>
+        </li>
+        <li>
+            {% comment %} contact_us {% endcomment %}
+            <a href="{% url 'contact_us' %}">contact us</a>
+        </li>
+        {% comment %} <li>
+            <a href="{% url 'faq' %}">faq</a>
+        </li> {% endcomment %}
+        {% comment %} <li>
+            <a href="{% url 'order_success' %}">order success</a>
+        </li> {% endcomment %}
+        {% comment %} <li>
+            <a href="#">order tracking</a>
+        </li> {% endcomment %}
+        {% comment %} <li>
+            <a href="{% url 'review' %}">review</a>
+        </li> {% endcomment %}
+        <li>
+            <a href="{% url 'search_bar' %}">search</a>
+        </li>
+        <li>
+            <a href="{% url 'user_dashboard'  %}">user dashboard</a>
+        </li>
+        <li>
+            <a href="{% url 'wishlist_page' %}">wishlist</a>
+        </li>
+    </ul>
+</li>
+<li class="dropdown">
+    <a href="javascript:void(0)" class="nav-link menu-title">blog</a>
+    <ul class="nav-submenu menu-content">
+        <li>
+            {% comment %} <a href="{% url 'blog_details' '3709c32c-d518-41b7-9e52-d7f46f587aed' %}">Blog Details</a> {% endcomment %}
+            <a href="{% url 'blog_details' 'a63c5dd8-7f99-4653-bdb3-49a857a8ae97' %}">Blog Details</a>
+            {% comment %} <a href="{% url 'blog_details' '26d3bcc4-d79c-44b7-9ea0-b4839f48879e' %}">Blog Details</a> {% endcomment %}
+
+        </li>
+        <li>
+            <a href="{% url 'infinite_scroll' %}">Blog Infinite Scroll</a>
+        </li>
+        <li>
+            <a href="{% url 'left_sidebar' %}">Blog Left Sidebar</a>
+        </li>
+        <li>
+            <a href="{% url 'listing' %}">Blog Listing</a>
+        </li>
+        <li>
+            <a href="{% url 'masonary' %}">blog Masonary <span>New</span></a>
+        </li>
+        <li>
+            <a href="{% url 'no_sidebar' %}">blog No Sidebar</a>
+        </li>
+        <li>
+            <a href="{% url 'right_sidebar' %}">Blog Right Sidebar</a>
+        </li>
+    </ul>
+</li>

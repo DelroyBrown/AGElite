@@ -1,0 +1,124 @@
+{% load static %}
+{% load sass_tags %}
+{% load custom_templatetags %}
+{% load mathfilters %}
+
+{% block furniture-tab-banner-section %}
+   <!-- tab banner section start -->
+<section class="tab-section">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="title-3 text-center">
+                    <h2>Hurry up!</h2>
+                    <h5 class="theme-color">Special Offer</h5>
+                </div>
+                <div class="tab-wrap">
+                    <ul class="nav nav-tabs" id="myTab">
+                        {% for category in subcategories %}
+                        <li class="nav-item">
+                            <button class="nav-link{% if forloop.first %} active {% endif %}" id="{{category.categoryName|slugify}}-tab" data-bs-toggle="tab" data-bs-target="#{{category.categoryName|slugify}}"
+                                type="button">{{category.categoryName}}</button>
+                        </li>
+                        {% endfor %}
+
+                    </ul>
+                    <div class="tab-content" id="myTabContent">
+                        {% for subcategory, products in products_by_subcategory.items %}
+
+                        <div class="tab-pane fade {% if forloop.first %} active show {% endif %}" id="{{subcategory.categoryName|slugify}}" role="tabpanel">
+                            <div class="offer-wrap product-style-1">
+                                <div class="row g-xl-4 g-3">
+                                    {% if products %}
+                                    {% for product in products %}
+                                    <div class="col-lg-4 col-md-6">
+                                        <div class="product-list">
+                                            <div class="product-box product-box1">
+                                                <div class="img-wrapper">
+                                                    <a href="{% url 'left_slidebar' product.id %}" class="text-center">
+                                                        <img loading="lazy" src="{{product.productImageFront}}"
+                                                            class="img-fluid blur-up lazyload" alt="">
+                                                    </a>
+                                                    <div class="circle-shape"></div>
+                                                </div>
+                                                <div class="product-details">
+                                                    <h3 class="theme-color">
+                                                        {% if product.productType == "Simple" %}
+                                                        {{""|return_currency_wise_symbol:request}}{{product.product_price_range|return_currency_wise_ammount:request}}
+                                                        {% else %}
+                                                        {{product.product_price_range|return_currency_wise_ammount_range:request}}
+                                                        {% endif %}
+                                                        
+                                                        <span
+                                                        class="font-light ms-1">
+                                                        {% if product.productType == "Simple" %} 
+                                                        {{""|return_currency_wise_symbol:request}}{{product.product_actual_price_range|return_currency_wise_ammount:request}} 
+                                                        {% else %} 
+                                                        {{product.product_actual_price_range|return_currency_wise_ammount_range:request}}
+                                                        {% endif %} 
+                                                    </span></h3>
+
+                                                    <a href="{% url 'shop_left_slidebar' %}" class="font-default">
+                                                        <h5>{{product.productName}}</h5>
+                                                    </a>
+                                                    <ul class="rating">
+                                                        <!-- ------------------------------------------------------------------- -->
+                                            {% if product.productFinalRating|to_int < 5|to_int %} 
+                                            {% for x in product.productFinalRating|times %} <li>
+                                                <a class="fas fa-star theme-color" id="productOfStar" href="{% url 'left_slidebar' product.id %}"></a>
+                                                </li>
+                                                {% endfor %}
+
+                                                {% with number1=5|to_int number2=product.productFinalRating|to_int %}
+                                                {% with number3=number1|sub:number2 %}
+
+
+                                                {% for x in number3|times %}
+                                                <li>
+                                                    <i class="fas fa-star"></i>
+                                                </li>
+                                                {% endfor %}
+
+                                                {% endwith %}
+                                                {% endwith %}
+
+                                                {% else %}
+                                                <li>
+                                                    <i class="fas fa-star theme-color"></i>
+                                                </li>
+                                                <li>
+                                                    <i class="fas fa-star theme-color"></i>
+                                                </li>
+                                                <li>
+                                                    <i class="fas fa-star theme-color"></i>
+                                                </li>
+                                                <li>
+                                                    <i class="fas fa-star theme-color"></i>
+                                                </li>
+                                                <li>
+                                                    <i class="fas fa-star theme-color"></i>
+                                                </li>
+                                                {% endif %}
+                                                <!-- ------------------------------------------------------------------- -->
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+                                    {% else %}
+                                    <h2 style="text-align:center;"> No Products Yet </h2>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                       
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- tab banner section end -->
+{% endblock furniture-tab-banner-section %}

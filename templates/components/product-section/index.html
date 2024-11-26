@@ -1,0 +1,71 @@
+{% load static %}
+{% load sass_tags %}
+
+<div>
+    <div class="product-box">
+        <div class="img-wrapper">
+            <a href="{% url 'shop_left_slidebar' %}">
+                <img loading="lazy" src="{% static 'assets/images/furniture-images/new-arrival/1.jpg' %}"
+                    class="w-100 bg-img blur-up lazyload" alt="">
+            </a>
+            <div class="circle-shape"></div>
+            <span class="background-text">Furniture</span>
+            <div class="label-block">
+                <span class="label label-theme">30% Off</span>
+            </div>
+            <div class="cart-wrap">
+                <ul>
+                    <li>
+                        <a href="javascript:void(0)" class="addtocart-btn" data-bs-toggle="modal"
+                            data-bs-target="#addtocart">
+                            <i data-feather="shopping-bag"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)" data-bs-toggle="modal" href="#quick-view">
+                            <i data-feather="eye"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)">
+                            <i data-feather="refresh-cw"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)" class="wishlist">
+                            <i data-feather="heart"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="product-style-3 product-style-chair">
+            <div class="product-title d-block mb-0">
+                <p class="font-light mb-sm-2 mb-0">Fully Confirtable</p>
+                <a href="{% url 'shop_left_slidebar' %}" class="font-default">
+                    <h5>Orange Arm Chair</h5>
+                </a>
+            </div>
+            <div class="main-price">
+                <ul class="rating mb-1 mt-0">
+                    <li>
+                        <i class="fas fa-star theme-color"></i>
+                    </li>
+                    <li>
+                        <i class="fas fa-star theme-color"></i>
+                    </li>
+                    <li>
+                        <i class="fas fa-star"></i>
+                    </li>
+                    <li>
+                        <i class="fas fa-star"></i>
+                    </li>
+                    <li>
+                        <i class="fas fa-star"></i>
+                    </li>
+                </ul>
+                <h3 class="theme-color">$32.87</h3>
+            </div>
+        </div>
+    </div>
+</div>

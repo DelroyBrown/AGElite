@@ -1,0 +1,79 @@
+{% load static %}
+{% load sass_tags %}
+{% load custom_templatetags %}
+{% load mathfilters %}
+
+<!-- Deal Day Section Start -->
+<section class="deal-section">
+    <div class="container">
+        {% for banner in allbanners %}
+        {% if banner.bannerType|to_str == 'Timer' %}
+        <div class="row">
+            <div class="col-md-12">
+                <div class="discount-image-details-2">
+                    <div class="discount-images">
+                        <img loading="lazy" src="{{banner.bannerImage}}"
+                            class="img-fluid flower-images-1 blur-up lazyload" alt="">
+                        {% comment %} <img loading="lazy" src="{{banner.bannerImage}}"
+                            class="img-fluid flower-images-2 blur-up lazyload" alt=""> {% endcomment %}
+                    </div>
+
+                    <div class="discunt-details mt-lg-0 mt-4">
+                        <div>
+                            <div class="heart-button heart-button-light">
+                                <i data-feather="heart"></i>
+                            </div>
+
+                            <div class="discount-shop">
+                                <h2>Shop Now</h2>
+                                <h6>{{banner.titleOne}}</h6>
+                            </div>
+
+                            <h5 class="mt-3">Special Discount <span class="theme-color">{{banner.bannerProduct.productVariantDiscount}}% OFF</span></h5>
+                            <h2 class="mt-3 deal-text">Deal Of The Day <br>from <span class="theme-color">${{banner.bannerProduct.productVariantPrice}}</span>
+                            </h2>
+                            <div class="timer-style-2 mt-xl-1 my-2 justify-content-center d-flex">
+                                <ul>
+                                    <li>
+                                        <div class="counter">
+                                            <div>
+                                                <h2 id="days1" class="theme-color"></h2>Days
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="counter">
+                                            <div>
+                                                <h2 id="hours1" class="theme-color"></h2>Hour
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="counter">
+                                            <div>
+                                                <h2 id="minutes1" class="theme-color"></h2>Min
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="counter">
+                                            <div>
+                                                <h2 id="seconds1" class="theme-color"></h2>Sec
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <button type="button" onclick="location.href='{% url 'shop_left_slidebar' %}' "
+                                class="btn default-light-theme default-theme mt-2">Shop
+                                Now</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        {% endfor %}
+    </div>
+</section>
+<!-- Deal Day Section end -->

@@ -1,0 +1,46 @@
+{% load static %}
+{% load sass_tags %}
+<!-- Blog Section Start -->
+<section class="section-b-space">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="title-3 text-center">
+                    <h2>Our News & Update</h2>
+                    <h5>Our Blog</h5>
+                </div>
+            </div>
+
+            <div class="slide-3">
+                {% for blog in blogs  %}
+                <div class="product-style-4 ratio2_3">
+                    <div class="blog-header">
+                        <a class="blog-image" href="{% url 'blog_details' blog.id %}">
+                            <img loading="lazy" src="{{blog.blogImage}}" class="img-fluid bg-img blur-up lazyload"
+                                alt="">
+                            <div class="blog-date">
+                                <div class="date-hover">
+                                    <div>
+                                        <h2>{{blog.createdAt|date:"d"}}</h2>
+                                        <h3>{{blog.createdAt|date:"M"}}</h3>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="blog-footer">
+                        <h2 class="theme-color">{{blog.blogTitle}}</h2>
+                        <h5 class="theme-color">New Offer -56% Discount</h5>
+                        <h4>{{blog.blogSubTitle}}</h4>
+                        <h4 class="brand-name">Latest Night Lamp From $35</h4>
+                        <button onclick="location.href='{% url 'blog_details' blog.id %}'" type="button"
+                            class="btn default-theme">Read More <i class="fas fa-chevron-right ms-2"></i></button>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Blog Section End -->

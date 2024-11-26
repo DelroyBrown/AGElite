@@ -1,0 +1,68 @@
+{% load static %}
+{% load sass_tags %}
+{% load custom_templatetags %}
+{% load mathfilters %}
+
+
+<!-- category section start -->
+<section class="category-section ratio_40">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="title title-2 text-center">
+                    <h2>Our Category</h2>
+                    <h5 class="text-color">Our collection</h5>
+                </div>
+            </div>
+        </div>
+        <div class="row gy-3">
+            <div class="col-xxl-2 col-lg-3">
+                <div class="category-wrap category-padding category-block theme-bg-color">
+                    <div>
+                        <h2 class="light-text">Top</h2>
+                        <h2 class="top-spacing">Our Top </h2>
+                        <span>Categories</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xxl-10 col-lg-9">
+                <div class="category-wrapper category-slider1 white-arrow category-arrow">
+                    {% comment %} {% if request.path == '/index_default' %} {% endcomment %}
+                    {% for category in subcategories %}                            
+                    <div>
+                        <a href="{% url 'shop_left_slidebar' %}" class="category-wrap category-padding">
+                            <img loading="lazy" src="{{category.categoryImage}}" class="bg-img blur-up lazyload"
+                                alt="category image">
+                            <div class="category-content category-text-1">
+                                <h3 class="theme-color">{{category.categoryName}}</h3>
+                                {% if category.parent|to_str == "None" %}
+                                {% else %}
+                                <span class="text-dark">{{category.parent}}</span>
+                                {% endif %}
+                            </div>
+                        </a>
+                    </div>
+                    {% endfor %}   
+                    {% comment %} {% elif request.path == '/flower_demo' %} {% endcomment %}
+                    {% for category in subcategories %}                            
+                    <div>
+                        <a href="{% url 'shop_left_slidebar' %}" class="category-wrap category-padding">
+                            <img loading="lazy" src="{{category.categoryImage}}" class="bg-img blur-up lazyload"
+                                alt="category image">
+                            <div class="category-content category-text-1">
+                                <h3 class="theme-color">{{category.categoryName}}</h3>
+                                {% if category.parent|to_str == "None" %}
+                                {% else %}
+                                <span class="text-dark">{{category.parent}}</span>
+                                {% endif %}
+                            </div>
+                        </a>
+                    </div>
+                    {% endfor %} 
+                    {% comment %} {% endif %} {% endcomment %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- category section end -->

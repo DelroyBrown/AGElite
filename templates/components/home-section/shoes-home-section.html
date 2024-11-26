@@ -1,0 +1,138 @@
+{% load static %}
+{% load sass_tags %}  
+{% load custom_templatetags %}
+{% load mathfilters %}
+
+
+{% block home-section %}
+    <!-- home slider start -->
+    <section class="pt-0 overflow-hidden">
+        <div>
+            <div class="banner-slider box-arrow">
+                <!-- Slider 1 Start -->
+                {% for banner in allbanners  %}
+                {% if banner.bannerType|to_str == 'Slider' %}
+
+                <div class="banner-poster">
+                    <div class="slider-right-detail">
+                        <div class="labels">
+                            <ul class="label-15">
+                                <li>
+                                    <a href="https://www.facebook.com/">
+                                        <img loading="lazy" src="{% static 'assets/images/social-icon/1.png' %}" class="img-fluid blur-up lazyload"
+                                            alt="facebook">
+                                        <h5 class="d-lg-block d-none">Facebook</h5>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://www.instagram.com/">
+                                        <img loading="lazy" src="{% static 'assets/images/social-icon/2.png' %}" class="img-fluid blur-up lazyload"
+                                            alt="Instagram">
+                                        <h5 class="d-lg-block d-none">Instagram</h5>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://twitter.com/">
+                                        <img loading="lazy" src="{% static 'assets/images/social-icon/3.png' %}" class="img-fluid blur-up lazyload"
+                                            alt="Twitter">
+                                        <h5 class="d-lg-block d-none">Twitter</h5>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <h4>New Festival Offer</h4>
+                        <div class="offer-box">
+                            <h6>{{banner.bannerProduct.productVariantDiscount}}% OFF</h6>
+                        </div>
+                    </div>
+
+                    <div class="slider-bg">
+                        <div class="bg-text">
+                            <span>{{banner.bannerProduct.variantProduct.productName}}</span>
+                        </div>
+
+                        <div class="bg-circle gradient-purple"></div>
+                        <img loading="lazy" src="{{banner.bannerImage}}" class="shoes-1 img-fluid blur-up lazyload" alt="">
+                    </div>
+
+                    <div class="sugestion-product d-xl-block d-none">
+                        <h3>Sugestion Product</h3>
+                        <h6>Our Collection</h6>
+
+                        <a href="{% url 'shop_left_slidebar' %}" class="slider-shoes-image d-block">
+                            <div class="relative-shoes">
+                                <img loading="lazy" src="{{banner.bannerImage}}" class="img-fluid blur-up lazyload" alt="">
+                                <div class="shoes-price">
+                                    <h5>{{""|return_currency_wise_symbol:request }}{{banner.bannerProduct.productVariantFinalPrice|return_currency_wise_ammount:request}}</h5>
+                                    <h6>{{banner.bannerProduct.variantProduct.productName}}</h6>
+                                    <ul class="rating d-flex justify-content-between">
+                                        <!-- ------------------------------------------------------------------- -->
+                                        {% if product.productFinalRating|to_int < 5|to_int %} 
+                                        {% for x in product.productFinalRating|times %} <li>
+                                            <a class="fas fa-star theme-color" id="productOfStar" href="{% url 'left_slidebar' product.id %}"></a>
+                                            </li>
+                                            {% endfor %}
+
+                                            {% with number1=5|to_int number2=product.productFinalRating|to_int %}
+                                            {% with number3=number1|sub:number2 %}
+
+
+                                            {% for x in number3|times %}
+                                            <li>
+                                                <i class="fas fa-star"></i>
+                                            </li>
+                                            {% endfor %}
+
+                                            {% endwith %}
+                                            {% endwith %}
+
+                                            {% else %}
+                                            <li>
+                                                <i class="fas fa-star theme-color"></i>
+                                            </li>
+                                            <li>
+                                                <i class="fas fa-star theme-color"></i>
+                                            </li>
+                                            <li>
+                                                <i class="fas fa-star theme-color"></i>
+                                            </li>
+                                            <li>
+                                                <i class="fas fa-star theme-color"></i>
+                                            </li>
+                                            <li>
+                                                <i class="fas fa-star theme-color"></i>
+                                            </li>
+                                            {% endif %}
+                                            <!-- ------------------------------------------------------------------- -->
+                                    </ul>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="price-number">
+                        <h2>{{""|return_currency_wise_symbol:request }}{{banner.bannerProduct.productVariantFinalPrice|return_currency_wise_ammount:request}}<span>
+                            <del>
+                                {% if banner.bannerProduct.productVariantDiscount|to_int == 0 %}
+                                {% else %}
+                                {{""|return_currency_wise_symbol:request }}{{banner.bannerProduct.productVariantPrice|return_currency_wise_ammount:request}}
+                                {% endif %}
+                            </del></span>
+                        </h2>
+                        <h6>{{banner.bannerProduct.variantProduct.productDescription|safe}}</h6>
+                    </div>
+
+                    <div class="slider-arrow-2">
+                        <div class="left-arrow d-lg-block d-none"></div>
+                        <div class="right-arrow d-lg-block d-none"></div>
+                    </div>
+                </div>
+                {% endif %}
+                {% endfor %}
+
+                <!-- Slider 1 End -->
+            </div>
+        </div>
+    </section>
+    <!-- home slider end -->
+{% endblock home-section %}

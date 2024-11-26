@@ -1,0 +1,35 @@
+{% load static %}
+{% load sass_tags %}
+
+<!-- New Arrival Section Start -->
+<section class="ratio_asos category-style-3">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 p-0">
+                <div class="title text-center">
+                    <h5>Just For You</h5>
+                    <h2>Fresh Fruits</h2>
+                </div>
+            </div>
+
+            <div class="product-wrapper slide-4">
+                {% for category in subcategories  %}
+                <div>
+                    <div class="category-image-fruit">
+                        {% comment %} <img loading="lazy" src="{{category.categoryImage}}" class="img-fluid blur-up lazyload" alt=""> {% endcomment %}
+                        <div class="category-contain">
+                            <img loading="lazy" src="{{category.categoryImage}}" class="blur-up lazyload" alt="">
+                        </div>
+
+                        <div class="category-text">
+                            <h2>{{category.categoryName}}</h2>
+                            <h5>{{category.categoryName}}</h5>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>
+<!-- New Arrival Section End -->

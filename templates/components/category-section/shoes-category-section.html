@@ -1,0 +1,37 @@
+{% load static %}
+{% load sass_tags %}
+{% load custom_templatetags %}
+{% load mathfilters %}
+
+
+<!-- category section start -->
+<section class="category-section">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="title title-2 text-center">
+                    <h2>Our Category</h2>
+                    <h5>Our collection</h5>
+                </div>
+            </div>
+        </div>
+        <div class="category-wrapper category-slider white-arrow">
+            {% for category in subcategories  %}
+            <div>
+                <div class="category-wrap category-color">
+                    <a href="{% url 'shop_with_category' %}">
+                        <img loading="lazy" src="{{category.categoryImage}}" class="img-fluid blur-up lazyload"
+                            alt="category image">
+                        <div class="category-content category-text t-text">
+                            <h3>{{category.categoryName}}</h3>
+                            {% comment %} <span>{{category.category_products_price_range|return_currency_wise_ammount_range:request}}</span> {% endcomment %}
+                            {% comment %} {{category.category_products_price_range|return_currency_wise_ammount_range:request}} {% endcomment %}
+                        </div>
+                    </a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+<!-- category section end -->

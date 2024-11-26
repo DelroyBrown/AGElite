@@ -1,0 +1,127 @@
+{% load static %}
+{% load sass_tags %}
+{% load custom_templatetags %}
+{% load mathfilters %}
+
+
+<!-- banner section 2 start -->
+{% if first_banner and second_banner and third_banner and fourth_banner %}
+
+<section class="banner-style-2 offer-banner">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="title title-2 text-center">
+                    <h2>New Offers</h2>
+                    <h5 class="text-color">Just For You</h5>
+                </div>
+            </div>
+        </div>
+        <div class="row gy-4">
+            <div class="col-lg-6 ratio2_1">
+                <div class="collection-banner p-right text-right">
+                    <a href="{% url 'shop_left_slidebar' %}" class="banner-img">
+                        <img loading="lazy" src="{{first_banner.bannerImage}}" class="bg-img blur-up lazyload" alt="">
+                        {% if request.path == '/flower_demo' %}
+                        <img loading="lazy" src="{{first_banner.bannerImage}}" class="bg-img blur-up lazyload" alt="">
+                        {% elif request.path == '/shoes_demo' %}
+                        <img loading="lazy" src="{{first_banner.bannerImage}}" class="bg-img blur-up lazyload" alt="">
+                        {% endif %}
+                    </a>
+                    <div class="banner-text">
+                        <div class="banner-content">
+                            {% if first_banner %}
+                            <h2> {{first_banner.bannerProduct.variantProduct.productName}} from <span
+                                    class="theme-color">{{""|return_currency_wise_symbol:request }}{{first_banner.bannerProduct.productVariantFinalPrice|return_currency_wise_ammount:request}}</span>
+                            </h2>
+                            <button
+                                onclick="location.href = '{% url 'left_slidebar' first_banner.bannerProduct.variantProduct.id %}' "
+                                type="button" class="btn btn-solid-default">Shop Now</button>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="row gy-4">
+                    <div class="col-lg-12 ratio_40">
+                        <div class="collection-banner p-left banner-title">
+                            <a href="{% url 'shop_left_slidebar' %}" class="banner-img">
+                                <img loading="lazy" src="{{second_banner.bannerImage}}" class="bg-img blur-up lazyload"
+                                    alt="">
+                                {% if request.path == '/flower_demo' %}
+                                <img loading="lazy" src="{{second_banner.bannerImage}}" class="bg-img blur-up lazyload"
+                                    alt="">
+                                {% elif request.path == '/shoes_demo' %}
+                                <img loading="lazy" src="{{second_banner.bannerImage}}" class="bg-img blur-up lazyload"
+                                    alt="">
+                                {% endif %}
+                            </a>
+                            <div class="banner-text">
+                                <div class="banner-content">
+                                    {% if second_banner %}
+                                    <h3 class="h-bottom">{{second_banner.bannerProduct.variantProduct.productName}} from
+                                        <span
+                                            class="theme-color">{{""|return_currency_wise_symbol:request }}{{second_banner.bannerProduct.productVariantFinalPrice|return_currency_wise_ammount:request}}</span>
+                                    </h3>
+                                    <button
+                                        onclick="location.href = '{% url 'left_slidebar' second_banner.bannerProduct.variantProduct.id %}' "
+                                        type="button" class="btn btn-solid-default">Shop Now</button>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 ratio2_3">
+                        <div class="collection-banner p-center text-center">
+                            <a href="{% url 'shop_left_slidebar' %}" class="banner-img">
+                                <img loading="lazy" src="{{third_banner.bannerImage}}" class="bg-img blur-up lazyload"
+                                    alt="">
+                                {% if request.path == '/flower_demo' %}
+                                <img loading="lazy" src="{{third_banner.bannerImage}}" class="bg-img blur-up lazyload"
+                                    alt="">
+                                <img loading="lazy" src="{{third_banner.bannerImage}}" class="bg-img blur-up lazyload"
+                                    alt="">
+                                {% endif %}
+                            </a>
+                            <a href="{% url 'shop_left_slidebar' %}" class="contain-banner">
+                                {% if third_banner %}
+                                <div class="banner-content with-bg spacing-banner">
+                                    <h3 class="mb-1">{{third_banner.bannerProduct.variantProduct.productName}}</h3>
+                                    <span>Discount -{{third_banner.bannerProduct.productVariantDiscount}}%</span>
+                                </div>
+                                {% endif %}
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 ratio2_3">
+                        <div class="collection-banner p-center text-center">
+                            <a href="{% url 'shop_left_slidebar' %}" class="banner-img">
+                                <img loading="lazy" src="{{fourth_banner.bannerImage}}" class="bg-img blur-up lazyload"
+                                    alt="">
+                                {% if request.path == '/flower_demo' %}
+                                <img loading="lazy" src="{{fourth_banner.bannerImage}}" class="bg-img blur-up lazyload"
+                                    alt="">
+                                {% elif request.path == '/shoes_demo' %}
+                                <img loading="lazy" src="{{fourth_banner.bannerImage}}" class="bg-img blur-up lazyload"
+                                    alt="">
+                                {% endif %}
+                            </a>
+                            <a href="{% url 'shop_left_slidebar' %}" class="contain-banner">
+                                {% if fourth_banner %}
+                                <div class="banner-content with-bg spacing-banner">
+                                    <h3 class="mb-1">{{fourth_banner.bannerProduct.variantProduct.productName}}</h3>
+                                    <span>Discount -{{fourth_banner.bannerProduct.productVariantDiscount}}%</span>
+                                </div>
+                                {% endif %}
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endif %}
+<!-- banner section 2 end -->
