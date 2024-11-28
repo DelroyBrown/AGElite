@@ -8,6 +8,7 @@ app_name = 'AGElite_base'
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('AGElite_home.urls')),
+    path('', include('AGElite_products.urls')),
 ]
 
 if settings.DEBUG:

@@ -24,6 +24,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'sass_processor',
     'AGElite_home',
+    'AGElite_products',
 ]
 
 MIDDLEWARE = [
