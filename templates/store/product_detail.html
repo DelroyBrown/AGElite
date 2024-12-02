@@ -26,7 +26,7 @@
     <meta name="keywords" content="Voxo" />
     <meta name="author" content="Voxo" />
     <link rel="icon" href="/voxo/voxoapp/static/assets/images/favicon/2.png" type="image/x-icon" />
-    <title>Product 4 Image</title>
+    <title>Product Detail</title>
 
 
     {% include 'includes/commons/common-links.html' %}
@@ -120,24 +120,18 @@
                                 <div class="row g-4 ratio_asos">
 
                                     <div class="col-12">
-                                        <img loading="lazy" src="/fashion/product/multipleimages/1_VOEgc78.jpg"
+                                        <img loading="lazy" src="{% static 'product_images/tracksuit_1.png' %}"
+                                            class="img-fluid w-100 image_zoom_cls-2 blur-up lazyload" alt="">
+                                    </div>
+                                    <div class="col-12">
+                                        <img loading="lazy" src="{% static 'product_images/tracksuit_2.png' %}"
+                                            class="img-fluid w-100 image_zoom_cls-2 blur-up lazyload" alt="">
+                                    </div>
+                                    <div class="col-12">
+                                        <img loading="lazy" src="{% static 'product_images/tracksuit_3.png' %}"
                                             class="img-fluid w-100 image_zoom_cls-2 blur-up lazyload" alt="">
                                     </div>
 
-                                    <div class="col-12">
-                                        <img loading="lazy" src="/fashion/product/multipleimages/1_qRcNPPm.jpg"
-                                            class="img-fluid w-100 image_zoom_cls-2 blur-up lazyload" alt="">
-                                    </div>
-
-                                    <div class="col-12">
-                                        <img loading="lazy" src="/fashion/product/multipleimages/6_UEfVvfE.jpg"
-                                            class="img-fluid w-100 image_zoom_cls-2 blur-up lazyload" alt="">
-                                    </div>
-
-                                    <div class="col-12">
-                                        <img loading="lazy" src="/fashion/product/multipleimages/8_YIZVThr.jpg"
-                                            class="img-fluid w-100 image_zoom_cls-2 blur-up lazyload" alt="">
-                                    </div>
 
                                 </div>
                             </div>
@@ -148,14 +142,14 @@
                                         <ul>
                                             <li>
                                                 <img loading="lazy"
-                                                    src="/voxo/voxoapp/static/assets/images/gif/fire.gif"
+                                                    src="{% static 'assets/images/gif/fire.gif' %}"
                                                     class="img-fluid blur-up lazyload" alt="image">
                                                 <span class="p-counter">37</span>
                                                 <span class="lang">orders in last 24 hours</span>
                                             </li>
                                             <li>
                                                 <img loading="lazy"
-                                                    src="/voxo/voxoapp/static/assets/images/gif/person.gif"
+                                                    src="{% static 'assets/images/gif/person.gif' %}"
                                                     class="img-fluid user_img blur-up lazyload" alt="image">
                                                 <span class="p-counter">44</span>
                                                 <span class="lang">active view this</span>
@@ -164,21 +158,21 @@
                                     </div>
 
                                     <div class="details-image-concept">
-                                        <h2>Hoodie</h2>
+                                        <h2>Purple Tracksuit</h2>
                                     </div>
 
                                     <div class="label-section">
                                         <span class="badge badge-grey-color">#1 Best seller</span>
-                                        <span class="label-text">in Jeans</span>
+                                        <span class="label-text">in Clothing</span>
                                     </div>
 
                                     <h3 class="price-detail" id="productFinalPrice">
 
-                                        $45.00
+                                        £45.00
 
 
 
-                                        <del id="actualPrice">$50.00</del>
+                                        <del id="actualPrice">£50.00</del>
                                         <span id="discountPercentage">10% - 15% off </span>
 
                                     </h3>
