@@ -7,6 +7,7 @@ app_name = 'AGElite_products'
 
 urlpatterns = [
     path('store/', views.store_page, name='store'),
+    path('product_detail/', views.product_detail, name='product-detail'),
 ]
 
 if settings.DEBUG:
