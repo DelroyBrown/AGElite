@@ -1,0 +1,415 @@
+{% extends 'pages/shop/shop-base.html' %}
+{% load static %}
+{% load sass_tags %}
+{% load custom_templatetags %}
+{% load mathfilters %}
+{% block components %}
+
+<!-- Shop Section start -->
+<section class="section-b-space">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 category-side col-md-4">
+                <div class="category-option">
+                    <div class="button-close mb-3">
+                        <button class="btn p-0"><i data-feather="arrow-left"></i> Close</button>
+                    </div>
+                    <div class="accordion category-name" id="accordionExample">
+                        <div class="accordion-item category-rating">
+                            <h2 class="accordion-header" id="headingOne">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapseSix">
+                                    Category
+                                </button>
+                            </h2>
+                            <div id="collapseSix" class="accordion-collapse collapse show">
+                                <div class="accordion-body category-scroll">
+                                    <ul class="category-list page-name">
+                                        {% for category in ProductCategory %}
+                                        <li>
+                                            <a href="{% url 'filter_hide_with_id' category.id %}"
+                                                class="">{{category.categoryName}}<span>({{category.categoryTotalProduct}})</span></a>
+                                        </li>
+                                        {% empty %}
+                                    </ul>
+                                    <h1> No Such Categories Found</h1>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+
+                        {% include 'pages/shop/filter-base.html' %}
+                    </div>
+                </div>
+            </div>
+
+            <div class="category-product col-lg-9 col-12 ratio_30">
+                <!-- filter button -->
+                <div class="hide-button d-flex mb-3">
+                    <button class="btn hide-btn">
+                        <span class="d-lg-inline-block d-none">Hide Filter</span>
+                        <span class="d-lg-none d-inline-block">Show Filter</span>
+                    </button>
+                </div>
+                <!-- filter button -->
+                <div class="row g-4">
+
+                    <!-- label and featured section -->
+                    <div class="col-md-12">
+                        <ul class="short-name">
+                            {% for key, value in request.GET.items %}
+                            {% if key != 'selectedAttribute' and key != 'price' %}
+                            {% for attribute in value|return_selected_attribute_list:request %}
+                            <li>
+                                <div class="label-tag">
+                                    <span>{{attribute}}-{{key}}</span>
+                                    <button type="button" class="btn-close"
+                                        onclick="redirectToCreateQueryParamsUrl({'key':'{{ key }}','value':'{{ attribute }}','path':'{{path}}'})"></button>
+                                    {% comment %} <button type="button" class="btn-close"></button> {% endcomment %}
+                                </div>
+                            </li>
+                            {% endfor %}
+                            {% endif %}
+
+                            {% if key == 'price' %}
+                            {% with price_values=value|return_selected_attribute_list:request %}
+                            {% if price_values %}
+                            <li>
+                                <div class="label-tag">
+                                    <span>Price: {{""|return_currency_wise_symbol:request}}{{price_values.0}} -
+                                        {{""|return_currency_wise_symbol:request}}{{price_values|last}}</span>
+                                </div>
+                            </li>
+                            {% endif %}
+                            {% endwith %}
+                            {% endif %}
+                            {% endfor %}
+
+                            {% if 'price' in request.GET or 'selectedAttribute' in request.GET or 'brands' in request.GET or 'discount' in request.GET or 'ratings' in request.GET %}
+                            {% if request.GET.page %}
+
+                            <div class="label-tag">
+                                <a href="{% url 'filter_hide' %}"><span>Clear All</span></a>
+                            </div>
+
+                            {% endif %}
+                            {% endif %}
+
+
+                            {% if request.path == '/filter_hide' or request.GET.page %}
+                            {% if 'price' not in request.GET %}
+
+                            <li>
+                                <div class="label-tag">
+                                    <span>Price: {{""|return_currency_wise_symbol:request}}{{min_price}} -
+                                        {{""|return_currency_wise_symbol:request}}{{max_price}}</span>
+                                </div>
+                            </li>
+
+                            {% endif %}
+                            {% endif %}
+
+
+                            {% if request.path != '/filter_hide' or request.GET %}
+                            {% if not request.GET.page %}
+
+                            <div class="label-tag">
+                                <a href="{% url 'filter_hide' %}"><span>Clear All</span></a>
+                            </div>
+                            {% endif %}
+                            {% endif %}
+
+                        </ul>
+                        <script>
+                            function getCookie(name) {
+                                let cookieValue = null;
+                                if (document.cookie && document.cookie !== '') {
+                                    const cookies = document.cookie.split(';');
+                                    for (let i = 0; i < cookies.length; i++) {
+                                        const cookie = cookies[i].trim();
+                                        // Does this cookie string begin with the name we want?
+                                        if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                                            cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                                            break;
+                                        }
+                                    }
+                                }
+                                return cookieValue;
+                            }
+                            var csrftoken = getCookie('csrftoken');
+
+                            function redirectToCreateQueryParamsUrl(params) {
+                                console.log("-------------------Function call", params);
+                                var removeTagId = params.value + params.key + "CheckBox";
+                                var attributeCheckBox = document.getElementById(removeTagId);
+                                attributeCheckBox.checked = false;
+                                var sbmtButton = document.getElementById('submitBtnAtFilterSidebar');
+                                sbmtButton.click();
+                            }
+                        </script>
+                    </div>
+
+                    <div class="col-12">
+                        <div class="filter-options">
+                            <div class="select-options">
+                                <div class="page-view-filter">
+                                    <div class="dropdown select-featured">
+                                        <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton1"
+                                            data-bs-toggle="dropdown">
+                                            24 Page per view
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                            <li>
+                                                <a class="dropdown-item" href="javascript:void(0)">Alphabetically
+                                                    A-Z</a>
+                                            </li>
+                                            <li>
+                                                <a class="dropdown-item" href="javascript:void(0)">Alphabetically
+                                                    Z-A</a>
+                                            </li>
+                                            <li>
+                                                <a class="dropdown-item" href="javascript:void(0)">Price, High To
+                                                    Low</a>
+                                            </li>
+                                            <li>
+                                                <a class="dropdown-item" href="javascript:void(0)">Price, Low To
+                                                    High</a>
+                                            </li>
+                                            <li>
+                                                <a class="dropdown-item" href="javascript:void(0)">Date, Old To
+                                                    New</a>
+                                            </li>
+                                            <li>
+                                                <a class="dropdown-item" href="javascript:void(0)">Date, New To
+                                                    Old</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="dropdown select-featured">
+                                    <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton1"
+                                        data-bs-toggle="dropdown">
+                                        Select Featured
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        <li>
+                                            <a class="dropdown-item" href="javascript:void(0)">Jeans</a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item" href="javascript:void(0)">T-Shirt</a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item" href="javascript:void(0)">Shirt</a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item" href="javascript:void(0)">Jacket</a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item" href="javascript:void(0)">Hoodie</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="grid-options d-sm-inline-block d-none">
+                                <ul class="d-flex">
+                                    <li class="two-grid">
+                                        <a href="javascript:void(0)">
+                                            <img loading="lazy" src="{% static 'assets/svg/grid-2.svg' %}"
+                                                class="img-fluid blur-up lazyload" alt="">
+                                        </a>
+                                    </li>
+                                    <li class="three-grid d-md-inline-block d-none">
+                                        <a href="javascript:void(0)">
+                                            <img loading="lazy" src="{% static 'assets/svg/grid-3.svg' %}"
+                                                class="img-fluid blur-up lazyload" alt="">
+                                        </a>
+                                    </li>
+                                    <li class="grid-btn active d-lg-inline-block d-none">
+                                        <a href="javascript:void(0)">
+                                            <img loading="lazy" src="{% static 'assets/svg/grid.svg' %}"
+                                                class="img-fluid blur-up lazyload" alt="">
+                                        </a>
+                                    </li>
+                                    <li class="list-btn">
+                                        <a href="javascript:void(0)">
+                                            <img loading="lazy" src="{% static 'assets/svg/list.svg' %}"
+                                                class="img-fluid blur-up lazyload" alt="">
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- label and featured section -->
+
+                <!-- Product section -->
+                <div
+                    class="row g-sm-4 g-3 row-cols-xl-4 row-cols-md-3 row-cols-2 mt-1 custom-gy-5 product-style-2 ratio_asos product-list-section">
+                    {% if page_obj %}
+                    {% for product in page_obj %}
+                    <div>
+                        <div class="product-box">
+                            <div class="img-wrapper">
+                                <div class="front">
+                                    <a href="{% url 'left_slidebar' product.variantProduct.id %}">
+                                        <img loading="lazy" src="{{product.variantProduct.productImageFront.url}}"
+                                            class="bg-img blur-up lazyload" alt="">
+                                    </a>
+                                </div>
+                                <div class="back">
+                                    <a href="{% url 'left_slidebar' product.variantProduct.id %}">
+                                        <img loading="lazy" src="{{product.variantProduct.productImageBack.url}}"
+                                            class="bg-img blur-up lazyload" alt="">
+                                    </a>
+                                </div>
+                                <div class="cart-wrap">
+                                    <ul>
+                                        <li>
+                                            <a href="{% url 'add_to_cart' product.variantProduct.id|return_first_product_variant 1 %}"
+                                                class="addtocart-btn">
+                                                <i data-feather="shopping-bag"></i>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a onclick="handleQuickView({'productId':'{{product.variantProduct.id}}','productVariantId':'{{product.variantProduct.id|return_first_product_variant}}'})"
+                                                data-bs-toggle="modal" href="#quick-view">
+                                                <i data-feather="eye"></i>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="{% url 'compare_products' product.variantProduct.id|return_first_product_variant %}"
+                                                class="add-to-compare-list">
+                                                <i data-feather="refresh-cw"></i>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="{% url 'add_to_wishlist' product.variantProduct.id|return_first_product_variant %}"
+                                                class="wishlist">
+                                                <i data-feather="heart"></i>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="product-details">
+                                <div class="rating-details">
+                                    <span class="font-light grid-content">{{product.variantProduct.proCategory}}</span>
+                                    <ul class="rating mt-0">
+                                        <!-- ------------------------------------------------------------------- -->
+                                        {% if product.variantProduct.productFinalRating|to_int < 5|to_int %}
+
+                                        {% for x in product.variantProduct.productFinalRating|times %}
+                                        <li>
+                                            <i class="fas fa-star theme-color"></i>
+                                        </li>
+                                        {% endfor %}
+
+                                        {% with number1=5|to_int number2=product.variantProduct.productFinalRating|to_int %}
+                                        {% with number3=number1|sub:number2 %}
+
+
+                                        {% for x in number3|times %}
+                                        <li>
+                                            <i class="fas fa-star"></i>
+                                        </li>
+                                        {% endfor %}
+
+                                        {% endwith %}
+                                        {% endwith %}
+
+                                        {% else %}
+
+                                        <li>
+                                            <i class="fas fa-star theme-color"></i>
+                                        </li>
+                                        <li>
+                                            <i class="fas fa-star theme-color"></i>
+                                        </li>
+                                        <li>
+                                            <i class="fas fa-star theme-color"></i>
+                                        </li>
+                                        <li>
+                                            <i class="fas fa-star theme-color"></i>
+                                        </li>
+                                        <li>
+                                            <i class="fas fa-star theme-color"></i>
+                                        </li>
+                                        {% endif %}
+                                        <!-- ------------------------------------------------------------------- -->
+                                    </ul>
+                                </div>
+                                <div class="main-price">
+                                    <a href="{% url 'left_slidebar' product.variantProduct.id %}" class="font-default">
+                                        <h5 class="ms-0">{{product.variantProduct.productName}}</h5>
+                                    </a>
+                                    <div class="listing-content">
+                                        <span class="font-light">Regular Fit</span>
+                                        <p class="font-light">Lorem ipsum, dolor sit amet consectetur adipisicing
+                                            elit. Sit, deserunt? Asperiores aliquam voluptatum culpa aliquid ab
+                                            ducimus eaque illum, quibusdam reiciendis id ad consectetur quis, animi
+                                            qui, minus quidem eveniet! Dolorum magnam numquam, asperiores
+                                            accusantium architecto placeat quam officia, tempore repellendus.</p>
+                                    </div>
+                                    {% if product.variantProduct.productType == "Simple" %}
+                                    <h3 class="theme-color">
+                                        {{""|return_currency_wise_symbol:request}}{{product.variantProduct.product_price_range|return_currency_wise_ammount:request}}
+                                    </h3>
+                                    {% else %}
+                                    <h3 class="theme-color">
+                                        {{product.variantProduct.product_price_range|return_currency_wise_ammount_range:request}}
+                                    </h3>
+                                    {% endif %}
+                                    <button
+                                        onclick="location.href = '{% url 'add_to_cart' product.variantProduct.id|return_first_product_variant 1 %}';"
+                                        class="btn listing-content">Add To Cart</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+
+                {% if page_obj.has_other_pages %}
+                <div class="page-section">
+                    <div class="pagination">
+                        {% if page_obj.has_previous %}
+                        {% comment %} <a href="?{{ request.GET.urlencode }}&page={{ page_obj.previous_page_number }}"
+                            class="previous">Previous</a> {% endcomment %}
+                        <a href="{{page_obj.previous_page_number|update_url_parameters:request}}"
+                            class="previous">Previous</a>
+
+                        {% endif %}
+
+                        {% for num in page_obj.paginator.page_range %}
+                        {% if page_obj.number == num %}
+                        <span class="current-page">{{ num }}</span>
+                        {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+                        {% comment %} <a href="?{{ request.GET.urlencode }}&page={{ num }}" class="page">{{ num }}</a>
+                        {% endcomment %}
+                        <a href="{{num|update_url_parameters:request}}" class="page">{{ num }}</a>
+                        {% endif %}
+                        {% endfor %}
+
+                        {% if page_obj.has_next %}
+                        {% comment %} <a href="?{{ request.GET.urlencode }}&page={{ page_obj.next_page_number }}"
+                            class="next">Next</a> {% endcomment %}
+                        <a href="{{page_obj.next_page_number|update_url_parameters:request}}" class="next">Next</a>
+                        {% endif %}
+                    </div>
+                </div>
+                {% endif %}
+                {% else %}
+                <div class="success-icon">
+                    <img src="{% static 'assets/images/noproductsfound.png' %}" alt="">
+                </div>
+                {% endif %}
+                <!-- Product section -->
+
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Shop Section end -->
+
+{% endblock components %}

@@ -79,7 +79,7 @@
 
 
     <!-- header start -->
-  {% include 'includes/commons/header.html' %}
+    {% include 'includes/commons/header.html' %}
     <!-- header end -->
 
 
@@ -87,40 +87,7 @@
 
 
     <!-- mobile fix menu start -->
-    <div class="mobile-menu d-sm-none">
-        <ul>
-            <li>
-                <a href="/index_default" class="active">
-                    <i data-feather="home"></i>
-                    <span>Home</span>
-                </a>
-            </li>
-            <li>
-                <a href="javascript:void(0)" class="toggle-category">
-                    <i data-feather="align-justify"></i>
-                    <span>Category</span>
-                </a>
-            </li>
-            <li>
-                <a href="/cart_page">
-                    <i data-feather="shopping-bag"></i>
-                    <span>Cart</span>
-                </a>
-            </li>
-            <li>
-                <a href="/wishlist_page">
-                    <i data-feather="heart"></i>
-                    <span>Wishlist</span>
-                </a>
-            </li>
-            <li>
-                <a href="/user_dashboard">
-                    <i data-feather="user"></i>
-                    <span>Account</span>
-                </a>
-            </li>
-        </ul>
-    </div>
+    {% include 'includes/commons/mobile-fixed-menu.html' %}
     <!-- mobile fix menu end -->
 
 
@@ -1274,30 +1241,7 @@
 
 
     <!-- Subscribe Section Start -->
-    <section class="subscribe-section section-b-space">
-        <div>
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-8 col-md-6">
-                        <div class="subscribe-details">
-                            <h2 class="mb-3">Subscribe To Our Newsletter</h2>
-                            <h6>Subscribe and receive our newsletters to follow the news about our fresh and fantastic
-                                Products.</h6>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-4 col-md-6 mt-md-0 mt-3">
-                        <div class="subsribe-input">
-                            <div class="input-group">
-                                <input type="text" class="form-control" placeholder="Your Email Address">
-                                <button class="btn btn-solid-default btn-spacing" type="button">Subscribe</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    {% include 'includes/commons/newsletter.html' %}
     <!-- Subscribe Section End -->
 
 
@@ -1355,9 +1299,7 @@
     </div>
     <!-- Quick view modal end -->
 
-    <!-- Quick view modal start -->
 
-    <!-- Quick view modal end -->
 
     <!-- Newsletter modal start -->
     <div class="modal fade newletter-modal" id="newsletter">
